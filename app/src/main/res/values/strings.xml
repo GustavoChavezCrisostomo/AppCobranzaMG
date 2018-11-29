@@ -3,4 +3,9 @@
     <string name="login">Iniciar Sesion</string>
     <string name="logo">Mont Group SAC</string>
     <string name="user">User</string>
+    <string name="newRoute">Armar Ruta</string>
+    <string name="listClients">Cartelera de Cliente</string>
+    <string name="profile">Perfil</string>
+    <string name="password">Password</string>
+    <string name="goals">logros</string>
 </resources>

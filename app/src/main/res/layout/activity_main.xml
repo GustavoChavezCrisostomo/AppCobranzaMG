@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleDrawable="@drawable/iconpass">
+                app:passwordToggleDrawable="@drawable/iconpassword">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_input"
@@ -71,7 +71,7 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     tools:ignore="HardcodedText"
-                    android:hint="Password"/>
+                    android:hint="@string/password"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
@@ -15,22 +13,24 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/btn_logros"
+            android:id="@+id/btn_goals"
             android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:onClick="callLogros"
-            android:src="@drawable/iconologro" />
+            android:onClick="callGoals"
+            android:src="@drawable/iconGoals"
+            android:contentDescription="@string/goals" />
 
         <ImageButton
-            android:id="@+id/btn_perfil"
+            android:id="@+id/btn_profile"
             android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:onClick="callPerfil"
-            android:src="@drawable/iconperfil" />
+            android:onClick="callProfile"
+            android:src="@drawable/iconProfile"
+            android:contentDescription="@string/profile" />
 
     </LinearLayout>
 
@@ -44,7 +44,7 @@
             android:layout_width="38dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Logros"
+            android:text="@string/goals"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic" />
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Perfil"
+            android:text="@string/profile"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic" />
@@ -67,22 +67,24 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/btn_cliente"
+            android:id="@+id/btn_client"
             android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:onClick="callCliente"
-            android:src="@drawable/iconclient" />
+            android:onClick="callClient"
+            android:src="@drawable/iconClient"
+            android:contentDescription="@string/listClients" />
 
         <ImageButton
-            android:id="@+id/btn_ruta"
+            android:id="@+id/btn_Route"
             android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:onClick="callRuta"
-            android:src="@drawable/iconmap" />
+            android:onClick="callRoute"
+            android:src="@drawable/iconMap"
+            android:contentDescription="@string/newRoute" />
     </LinearLayout>
 
     <LinearLayout
@@ -95,7 +97,7 @@
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cartelera de Cliente"
+            android:text="@string/listClients"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic" />
@@ -105,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Armar Ruta"
+            android:text="@string/newRoute"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic" />
