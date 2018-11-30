@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="callGoals"
-            android:src="@drawable/iconGoals"
+            android:src="@drawable/icongoals"
             android:contentDescription="@string/goals" />
 
         <ImageButton
@@ -29,7 +29,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="callProfile"
-            android:src="@drawable/iconProfile"
+            android:src="@drawable/iconprofile"
             android:contentDescription="@string/profile" />
 
     </LinearLayout>
@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="callClient"
-            android:src="@drawable/iconClient"
+            android:src="@drawable/iconclient"
             android:contentDescription="@string/listClients" />
 
         <ImageButton
@@ -83,7 +83,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="callRoute"
-            android:src="@drawable/iconMap"
+            android:src="@drawable/iconmap"
             android:contentDescription="@string/newRoute" />
     </LinearLayout>
 
