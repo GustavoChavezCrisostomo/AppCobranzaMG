@@ -1,15 +1,18 @@
 <resources>
     <string name="app_name">AppCobranzaMG</string>
-    <string name="welcome">Bienvenido</string>
+
     <string name="login">Iniciar Sesion</string>
     <string name="logo">Mont Group SAC</string>
     <string name="user">User</string>
+    <string name="password">Password</string>
+
     <string name="newRoute">Armar Ruta</string>
     <string name="listClients">Cartelera de Cliente</string>
     <string name="profile">Perfil</string>
-    <string name="password">Password</string>
+    <string name="welcome">Bienvenido</string>
     <string name="goals">logros</string>
     <string name="exit">Exit</string>
+
     <string name="phone">numTelf</string>
     <string name="email">email</string>
     <string name="place">lugar</string>
@@ -19,5 +22,14 @@
     <string name="correo">Correo</string>
     <string name="lugar">Zona Asignada</string>
     <string name="numClientes">Clientes Asignados</string>
+
     <string name="back">atras</string>
+    <string name="fullName">Nombre y Apellido</string>
+    <string name="ruc">RUC</string>
+    <string name="searchClient">Buscar Cliente por:</string>
+    <string name="write">Escribir</string>
+    <string name="Search">Buscar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -47,7 +47,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void callClient(View view) {
-
+        startActivity(new Intent(PrincipalActivity.this, ClientActivity.class));
     }
 
     public void callRoute(View view) {
