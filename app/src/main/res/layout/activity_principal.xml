@@ -1,116 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="80dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <ImageButton
-            android:id="@+id/btn_goals"
-            android:layout_width="186dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:onClick="callGoals"
-            android:src="@drawable/icongoals"
-            android:contentDescription="@string/goals" />
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_profile"
-            android:layout_width="186dp"
+            <ImageButton
+                android:id="@+id/btn_goals"
+                android:layout_width="186dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/goals"
+                android:onClick="callGoals"
+                android:src="@drawable/icongoals" />
+
+            <ImageButton
+                android:id="@+id/btn_profile"
+                android:layout_width="186dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/profile"
+                android:onClick="callProfile"
+                android:src="@drawable/iconprofile" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:onClick="callProfile"
-            android:src="@drawable/iconprofile"
-            android:contentDescription="@string/profile" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="38dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/goals"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/profile"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_client"
+                android:layout_width="186dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/listClients"
+                android:onClick="callClient"
+                android:src="@drawable/iconclient" />
+
+            <ImageButton
+                android:id="@+id/btn_Route"
+                android:layout_width="186dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/newRoute"
+                android:onClick="callRoute"
+                android:src="@drawable/iconmap" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="92dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/listClients"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/newRoute"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+        </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="38dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/goals"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/profile"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/btn_client"
-            android:layout_width="186dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:onClick="callClient"
-            android:src="@drawable/iconclient"
-            android:contentDescription="@string/listClients" />
-
-        <ImageButton
-            android:id="@+id/btn_Route"
-            android:layout_width="186dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:onClick="callRoute"
-            android:src="@drawable/iconmap"
-            android:contentDescription="@string/newRoute" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="92dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/listClients"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/newRoute"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

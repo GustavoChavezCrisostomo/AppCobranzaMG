@@ -50,9 +50,16 @@ public class ClientActivity extends AppCompatActivity {
         }
 
         if (tipo.getCheckedRadioButtonId() == R.id.rbtn_ruc){
-            Toast.makeText(this, "Buscar por RUC " + buscar , Toast.LENGTH_SHORT).show();
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(R.id.frame, ClientDetailFragment.newInstance());
+            transaction.commit();
+            //Toast.makeText(this, "Buscar por RUC " + buscar , Toast.LENGTH_SHORT).show();
 
         }else {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame, ClientDetailFragment.newInstance());
+            transaction.commit();
             Toast.makeText(this, "Buscar por nombre completo " + buscar , Toast.LENGTH_SHORT).show();
         }
     }
