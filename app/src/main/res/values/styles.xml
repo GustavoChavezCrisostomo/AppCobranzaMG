@@ -6,7 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/lusitana</item>
+        <item name="android:fontFamily">@font/merriweather_italic</item>
+    </style>
+
+    <style name="TitleBarTextAppearance" parent="android:Theme.NoTitleBar">
+        <item name="android:fontFamily">@font/dancing_script</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

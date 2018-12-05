@@ -2,5 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/kalam</item>
+        <item>@font/merriweather_italic</item>
     </array>
 </resources>

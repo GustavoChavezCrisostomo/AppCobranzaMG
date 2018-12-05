@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -99,6 +100,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -107,12 +109,59 @@
                 android:layout_height="wrap_content"
                 android:text="Programar Cobranza" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="@string/insetDate"
+                    android:drawableEnd="@drawable/iconcalender"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    tools:ignore="HardcodedText" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/material_unelevated_button"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/iconpin"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:text="@string/programDate"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/observations" />
+
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date" />
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:inputType="textMultiLine" />
+
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
