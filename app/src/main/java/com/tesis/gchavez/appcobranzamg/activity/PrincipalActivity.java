@@ -39,7 +39,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void callGoals(View view) {
-
+        startActivity(new Intent(PrincipalActivity.this, LogrosActivity.class));
     }
 
     public void callProfile(View view) {
@@ -51,7 +51,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void callRoute(View view) {
-
+        startActivity(new Intent(PrincipalActivity.this, RouteActivity.class));
     }
 
     public void logout(){

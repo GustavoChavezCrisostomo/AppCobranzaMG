@@ -27,10 +27,19 @@
             android:name=".activity.ClientActivity"
             android:parentActivityName=".activity.PrincipalActivity">
         </activity>
+        <activity
+            android:name=".activity.LogrosActivity"
+            android:parentActivityName=".activity.PrincipalActivity">
+        </activity>
+        <activity
+            android:name=".activity.RouteActivity"
+            android:parentActivityName=".activity.PrincipalActivity">
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

@@ -9,15 +9,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import com.tesis.gchavez.appcobranzamg.R;
 
-
+import java.util.Date;
 
 public class ClientDetailFragment extends DialogFragment implements View.OnClickListener {
-
 
     public ClientDetailFragment() {
         // Required empty public constructor
@@ -32,15 +34,20 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    EditText date;
+
+    private EditText dateInput;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_client_detail, container, false);
 
-        date = (EditText) view.findViewById(R.id.date_input);
-        date.setOnClickListener(this);
+        dateInput = (EditText) view.findViewById(R.id.date_input);
+        ImageButton datePicker = (ImageButton) view.findViewById(R.id.btn_calender);
+        datePicker.setOnClickListener(this);
+
+        Button program = (Button) view.findViewById(R.id.btn_program);
+        program.setOnClickListener(this);
 
         return view;
     }
@@ -48,8 +55,11 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.date_input:
+            case R.id.btn_calender:
                 showDatePickerDialog();
+                break;
+            case R.id.btn_program:
+                programDate();
                 break;
         }
     }
@@ -60,10 +70,15 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because january is zero
                 final String selectedDate = day + " / " + (month+1) + " / " + year;
-                date.setText(selectedDate);
+                dateInput.setText(selectedDate);
             }
         });
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+    }
+
+    private void programDate() {
+        String date = dateInput.getText().toString();
+        Toast.makeText(getActivity(), "Se programó cobranza para la fecha " + date, Toast.LENGTH_SHORT).show();
     }
 
 }

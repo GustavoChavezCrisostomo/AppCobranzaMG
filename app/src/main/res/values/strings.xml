@@ -35,4 +35,10 @@
     <string name="insetDate">Insertar Fecha</string>
     <string name="programDate">Programar Cobro</string>
     <string name="observations">Observaciones</string>
+    <string name="name">Nombre</string>
+    <string name="name_prueba">aaaaaa</string>
+    <string name="deuda">Deuda</string>
+    <string name="venc_deuda">Vencimiento Deuda</string>
+    <string name="forma_fch">12/12/2018</string>
+    <string name="program_cob">Programar Cobranza</string>
 </resources>
