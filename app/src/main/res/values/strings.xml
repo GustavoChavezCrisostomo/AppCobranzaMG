@@ -41,4 +41,7 @@
     <string name="venc_deuda">Vencimiento Deuda</string>
     <string name="forma_fch">12/12/2018</string>
     <string name="program_cob">Programar Cobranza</string>
+    <string name="client">Cliente</string>
+    <string name="money_prueba">0.00</string>
+    <string name="ruc_prueba">545485451257</string>
 </resources>
