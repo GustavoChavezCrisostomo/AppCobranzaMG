@@ -35,7 +35,9 @@ public class PrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        setTitle("Bienvenido " );
+
+        String name = PreferencesManager.getInstance().get(PreferencesManager.PREF_FULLNAME);
+        setTitle("Welcome " + name);
     }
 
     public void callGoals(View view) {

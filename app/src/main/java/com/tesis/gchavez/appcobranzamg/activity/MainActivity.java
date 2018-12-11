@@ -1,14 +1,21 @@
 package com.tesis.gchavez.appcobranzamg.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.tesis.gchavez.appcobranzamg.R;
+import com.tesis.gchavez.appcobranzamg.models.Usuario;
+import com.tesis.gchavez.appcobranzamg.service.ApiService;
+import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
 import com.tesis.gchavez.appcobranzamg.util.PreferencesManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,9 +51,54 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Completar los campos requeridos", Toast.LENGTH_SHORT).show();
             return;
         }
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
+        Call<Usuario> call = null;
 
-        startActivity(new Intent(MainActivity.this, PrincipalActivity.class));
-        finish();
+        call = service.login(login, password);
+
+        call.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                try {
+
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        Usuario usuario = response.body();
+                        Log.d(TAG, "responseMessage: " + usuario);
+                        // Grabar los datos en el SP
+                        PreferencesManager.getInstance().set(PreferencesManager.PREF_ID, ""+usuario.getId());
+                        PreferencesManager.getInstance().set(PreferencesManager.PREF_USERNAME, ""+usuario.getLogin());
+                        PreferencesManager.getInstance().set(PreferencesManager.PREF_FULLNAME, ""+usuario.getNombre());
+                        PreferencesManager.getInstance().set(PreferencesManager.PREF_ROLE, ""+usuario.getRole());
+                        PreferencesManager.getInstance().set(PreferencesManager.PREF_ISLOGGED, "1");
+
+                        //Toast.makeText(MainActivity.this, usuario.getMessage(), Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this, PrincipalActivity.class));
+                        finish();
+
+                    } else {
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("Error en el servicio");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString());
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+        });
 
     }
 

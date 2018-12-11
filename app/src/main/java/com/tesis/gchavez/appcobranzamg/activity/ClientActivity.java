@@ -50,16 +50,22 @@ public class ClientActivity extends AppCompatActivity {
         }
 
         if (tipo.getCheckedRadioButtonId() == R.id.rbtn_ruc){
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame, ClientDetailFragment.newInstance());
-            transaction.commit();
-
+            rptbuscarruc();
         }else {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame, ClientDetailFragment.newInstance());
-            transaction.commit();
+            rptbuscarname();
         }
+    }
+    
+    private void rptbuscarruc() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, ClientDetailFragment.newInstance());
+        transaction.commit();
+    }
+
+    private void rptbuscarname() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, ClientDetailFragment.newInstance());
+        transaction.commit();
     }
 
 }
