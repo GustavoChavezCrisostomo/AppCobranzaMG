@@ -1,5 +1,6 @@
 package com.tesis.gchavez.appcobranzamg.service;
 
+import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.models.Usuario;
 
 import retrofit2.Call;
@@ -22,5 +23,8 @@ public interface  ApiService {
 
     @GET("api/v1/user/{id}")
     Call<Usuario> showUsuario(@Path("id") Integer id);
+
+    @GET("api/v1/name/{name}")
+    Call<Cliente> showName(@Path("name") String name);
 
 }

@@ -11,6 +11,8 @@ public class Cliente {
     private String telefono;
     private Double deuda;
     private Date fchVenc;
+    private Date fchCobra;
+    private String observacion;
     private String longitud;
     private String latitud;
 
@@ -18,7 +20,7 @@ public class Cliente {
 
     }
 
-    public Cliente(Integer id, String nombre, String direccion, String distrito, String ruc, String telefono, Double deuda, Date fchVenc, String longitud, String latitud) {
+    public Cliente(Integer id, String nombre, String direccion, String distrito, String ruc, String telefono, Double deuda, Date fchVenc, Date fchCobra, String observacion, String longitud, String latitud) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -27,6 +29,8 @@ public class Cliente {
         this.telefono = telefono;
         this.deuda = deuda;
         this.fchVenc = fchVenc;
+        this.fchCobra = fchCobra;
+        this.observacion = observacion;
         this.longitud = longitud;
         this.latitud = latitud;
     }
@@ -55,6 +59,12 @@ public class Cliente {
     public Date getFchVenc() { return fchVenc; }
     public void setFchVenc(Date fchVenc) { this.fchVenc = fchVenc; }
 
+    public Date getFchCobra() { return fchCobra; }
+    public void setFchCobra(Date fchCobra) { this.fchCobra = fchCobra; }
+
+    public String getObservacion() { return observacion; }
+    public void setObservacion(String observacion) { this.observacion = observacion; }
+
     public String getLongitud() { return longitud; }
     public void setLongitud(String longitud) { this.longitud = longitud; }
 
@@ -72,6 +82,8 @@ public class Cliente {
                 ", telefono='" + telefono + '\'' +
                 ", deuda=" + deuda +
                 ", fchVenc=" + fchVenc +
+                ", fchCobra=" + fchCobra +
+                ", observacion='" + observacion + '\'' +
                 ", longitud='" + longitud + '\'' +
                 ", latitud='" + latitud + '\'' +
                 '}';
