@@ -44,4 +44,5 @@
     <string name="client">Cliente</string>
     <string name="money_prueba">0.00</string>
     <string name="ruc_prueba">545485451257</string>
+    <string name="addClient">Agregar Cliente</string>
 </resources>
