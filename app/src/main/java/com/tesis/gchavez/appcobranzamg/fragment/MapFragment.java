@@ -1,5 +1,7 @@
 package com.tesis.gchavez.appcobranzamg.fragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.tesis.gchavez.appcobranzamg.R;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MapFragment extends DialogFragment implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
+    private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1;
 
     public MapFragment() {
         // Required empty public constructor
@@ -32,18 +39,33 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_map, container, false);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        SupportMapFragment fragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
 
         return view;
     }
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        mMap = googleMap;
+
+        if (ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(this).attach(this).commit();
+
+            return;
+        }
+
+        mMap.setMyLocationEnabled(true);
+
     }
+
+
+
 }

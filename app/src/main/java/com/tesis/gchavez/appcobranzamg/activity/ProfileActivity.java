@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private int id;
 
+    public ProgressBar progressBar;
     public TextView userText;
     public TextView telfText;
     public TextView emailText;
@@ -55,15 +57,16 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // ProgressBar Gone
-        ProfileActivity.this.findViewById(R.id.main_progress).setVisibility(View.GONE);
+        //ProfileActivity.this.findViewById(R.id.main_progress).setVisibility(View.GONE);
 
         id = Integer.parseInt(PreferencesManager.getInstance().get(PreferencesManager.PREF_ID));
 
-        userText = (TextView) findViewById(R.id.name_text);
-        telfText = (TextView) findViewById(R.id.phone_text);
-        emailText = (TextView) findViewById(R.id.email_text);
-        zoneText = (TextView) findViewById(R.id.zone_text);
-        clienAsigText = (TextView) findViewById(R.id.clients_txt);
+        progressBar = findViewById(R.id.main_progress);
+        userText = findViewById(R.id.name_text);
+        telfText = findViewById(R.id.phone_text);
+        emailText = findViewById(R.id.email_text);
+        zoneText = findViewById(R.id.zone_text);
+        clienAsigText = findViewById(R.id.clients_txt);
 
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
@@ -88,6 +91,9 @@ public class ProfileActivity extends AppCompatActivity {
                         zoneText.setText(usuario.getZona());
                         clienAsigText.setText(Integer.toString(usuario.getClienAsig()));
 
+                        // ProgressBar Gone
+                        ProfileActivity.this.findViewById(R.id.main_progress).setVisibility(View.GONE);
+
                     } else {
                         Log.e(TAG, "onError: " + response.errorBody().string());
                         throw new Exception("Error en el servicio");
@@ -105,6 +111,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onFailure(Call<Usuario> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.toString());
                 Toast.makeText(ProfileActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                // ProgressBar Gone
+                ProfileActivity.this.findViewById(R.id.main_progress).setVisibility(View.GONE);
             }
         });
 
