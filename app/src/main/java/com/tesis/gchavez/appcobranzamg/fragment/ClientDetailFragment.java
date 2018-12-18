@@ -41,11 +41,11 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_client_detail, container, false);
 
-        dateInput = (EditText) view.findViewById(R.id.date_input);
-        ImageButton datePicker = (ImageButton) view.findViewById(R.id.btn_calender);
+        dateInput = view.findViewById(R.id.date_input);
+        ImageButton datePicker = view.findViewById(R.id.btn_calender);
         datePicker.setOnClickListener(this);
 
-        Button program = (Button) view.findViewById(R.id.btn_program);
+        Button program = view.findViewById(R.id.btn_program);
         program.setOnClickListener(this);
 
         return view;

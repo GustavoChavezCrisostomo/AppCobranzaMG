@@ -151,14 +151,14 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_program"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:icon="@drawable/iconpin"
-                android:layout_gravity="end"
-                android:layout_marginEnd="20dp"
-                android:text="@string/programDate"/>
+            android:id="@+id/btn_program"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/iconpin"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:text="@string/programDate"/>
 
         </LinearLayout>
 

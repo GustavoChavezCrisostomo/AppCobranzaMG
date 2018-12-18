@@ -1,22 +1,25 @@
 package com.tesis.gchavez.appcobranzamg.fragment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.tesis.gchavez.appcobranzamg.R;
+import com.tesis.gchavez.appcobranzamg.activity.SelectclienteActivity;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MapFragment extends DialogFragment implements OnMapReadyCallback {
+public class MapFragment extends DialogFragment implements OnMapReadyCallback, View.OnClickListener {
 
     private GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1;
@@ -44,6 +47,9 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback {
         SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
 
+        Button program = view.findViewById(R.id.btn_programClient);
+        program.setOnClickListener(this);
+
         return view;
     }
 
@@ -66,6 +72,9 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback {
 
     }
 
-
-
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), SelectclienteActivity.class);
+        getActivity().startActivity(intent);
+    }
 }

@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tesis.gchavez.appcobranzamg">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
 
     <application
         android:allowBackup="true"
@@ -45,8 +44,12 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAsFfNXdgUOB_0nCytZoEGfGaRyy3LvF_g"/>
+            android:value="AIzaSyAsFfNXdgUOB_0nCytZoEGfGaRyy3LvF_g" />
 
+        <activity
+            android:name=".activity.SelectclienteActivity"
+            android:parentActivityName=".activity.RouteActivity">
+        </activity>
     </application>
 
 </manifest>

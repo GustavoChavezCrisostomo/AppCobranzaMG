@@ -44,6 +44,7 @@ public class ClientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente);
+
         setTitle("Cartelera de Cliente" );
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.iconback);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,7 +56,7 @@ public class ClientActivity extends AppCompatActivity {
     public void callSearch(View view) {
         buscar = searchInput.getText().toString();
         if(buscar.isEmpty()){
-            Toast.makeText(this, "Completar el campos requerido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Completar el campo requerido", Toast.LENGTH_SHORT).show();
             return;
         }
 
