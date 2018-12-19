@@ -24,20 +24,16 @@
         <activity android:name=".activity.PrincipalActivity" />
         <activity
             android:name=".activity.ProfileActivity"
-            android:parentActivityName=".activity.PrincipalActivity">
-        </activity>
+            android:parentActivityName=".activity.PrincipalActivity"></activity>
         <activity
             android:name=".activity.ClientActivity"
-            android:parentActivityName=".activity.PrincipalActivity">
-        </activity>
+            android:parentActivityName=".activity.PrincipalActivity"></activity>
         <activity
             android:name=".activity.LogrosActivity"
-            android:parentActivityName=".activity.PrincipalActivity">
-        </activity>
+            android:parentActivityName=".activity.PrincipalActivity"></activity>
         <activity
             android:name=".activity.RouteActivity"
-            android:parentActivityName=".activity.PrincipalActivity">
-        </activity>
+            android:parentActivityName=".activity.PrincipalActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
@@ -48,8 +44,8 @@
 
         <activity
             android:name=".activity.SelectclienteActivity"
-            android:parentActivityName=".activity.RouteActivity">
-        </activity>
+            android:parentActivityName=".activity.RouteActivity"></activity>
+        <activity android:name=".activity.InformeActivity"></activity>
     </application>
 
 </manifest>

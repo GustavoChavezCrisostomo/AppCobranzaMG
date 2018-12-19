@@ -8,12 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.tesis.gchavez.appcobranzamg.R;
 import com.tesis.gchavez.appcobranzamg.activity.SelectclienteActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
@@ -22,6 +26,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class MapFragment extends DialogFragment implements OnMapReadyCallback, View.OnClickListener {
 
     private GoogleMap mMap;
+    private TextView fchAct;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1;
 
     public MapFragment() {
@@ -49,6 +54,13 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback, V
 
         Button program = view.findViewById(R.id.btn_programClient);
         program.setOnClickListener(this);
+
+        Date d=new Date();
+
+        fchAct= view.findViewById(R.id.txt_fchAct);
+        SimpleDateFormat fecc=new SimpleDateFormat("dd/MM/yyyy");
+        String fechacComplString = fecc.format(d);
+        fchAct.setText(fechacComplString);
 
         return view;
     }

@@ -6,68 +6,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MapFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView18"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:inputType="date"
-            android:text="@string/forma_fch"
-            android:textSize="16sp"
-            tools:ignore="TextViewEdits" />
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_programClient"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_addclient"
-            android:layout_gravity="center"
-            android:text="@string/addClient"/>
+            <TextView
+                android:id="@+id/txt_fchAct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:inputType="date"
+                android:text="@string/forma_fch"
+                android:textSize="16sp"
+                tools:ignore="TextViewEdits" />
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="350dp"
-            android:layout_height="200dp">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_programClient"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/addClient"
+                app:icon="@drawable/ic_addclient" />
+
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="350dp"
+                android:layout_height="200dp">
+
+                <LinearLayout
+                    android:layout_width="350dp"
+                    android:layout_height="200dp"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/list_client"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Armando ruta ..."
+                android:layout_marginTop="5dp"
+                android:textAlignment="center" />
 
             <LinearLayout
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="200dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list_client"
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
-        </ScrollView>
 
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Armando ruta ..."
-            android:textAlignment="center" />
 
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:orientation="vertical">
-
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
         </LinearLayout>
+    </ScrollView>
 
-
-    </LinearLayout>
 </FrameLayout>
