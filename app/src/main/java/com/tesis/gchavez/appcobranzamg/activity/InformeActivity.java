@@ -7,12 +7,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tesis.gchavez.appcobranzamg.R;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class InformeActivity extends AppCompatActivity {
+
+    private Spinner doc,pago;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,23 +30,35 @@ public class InformeActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener
-                (new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.delete:
-                                delete();
-                                break;
-                            case R.id.save:
-                                save();
-                                break;
-                        }
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.delete:
+                    delete();
+                    break;
+                case R.id.save:
+                    save();
+                    break;
+            }
 
-                        return true;
-                    }
-                });
+            return true;
+            }
+        });
 
+        doc = findViewById(R.id.spinner_doc);
+        List<String> listDoc = Arrays.asList(getResources().getStringArray(R.array.TDoc));
+
+        ArrayAdapter<String> spinnerAdapterDoc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listDoc);
+        spinnerAdapterDoc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        doc.setAdapter(spinnerAdapterDoc);
+
+        pago = findViewById(R.id.spinner_tpago);
+        List<String> listPago = Arrays.asList(getResources().getStringArray(R.array.TPago));
+
+        ArrayAdapter<String> spinnerAdapterPago = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPago);
+        spinnerAdapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pago.setAdapter(spinnerAdapterPago);
 
     }
 

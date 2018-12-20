@@ -6,6 +6,7 @@ public class Usuario {
     private String login;
     private String password;
     private String nombre;
+    private String imagen;
     private String telefono;
     private String correo;
     private String zona;
@@ -15,11 +16,12 @@ public class Usuario {
     public Usuario(){
     }
 
-    public Usuario(Integer id, String login, String password, String nombre, String telefono, String correo, String zona, Integer clienAsig, String role) {
+    public Usuario(Integer id, String login, String password, String nombre, String imagen, String telefono, String correo, String zona, Integer clienAsig, String role) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.nombre = nombre;
+        this.imagen = imagen;
         this.telefono = telefono;
         this.correo = correo;
         this.zona = zona;
@@ -38,6 +40,9 @@ public class Usuario {
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getImagen() { return imagen; }
+    public void setImagen(String imagen) { this.imagen = imagen; }
 
     public String getTelefono() { return telefono; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
@@ -61,6 +66,7 @@ public class Usuario {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", nombre='" + nombre + '\'' +
+                ", imagen='" + imagen + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
                 ", zona='" + zona + '\'' +

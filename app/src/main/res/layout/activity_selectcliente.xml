@@ -25,6 +25,7 @@
             android:textSize="16sp" />
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -36,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:hint="@string/ruc"
-                android:inputType="text"
+                android:inputType="number"
                 android:maxLines="1"
                 tools:ignore="HardcodedText" />
 

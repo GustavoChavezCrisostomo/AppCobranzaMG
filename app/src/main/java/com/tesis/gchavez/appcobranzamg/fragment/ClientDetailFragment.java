@@ -77,6 +77,12 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
 
     private void programDate() {
         String date = dateInput.getText().toString();
+
+        if(date.isEmpty()){
+            Toast.makeText(getActivity(), "Completar el campo fecha", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Toast.makeText(getActivity(), "Se programó cobranza para la fecha " + date, Toast.LENGTH_SHORT).show();
     }
 

@@ -48,4 +48,21 @@
     <string name="direccion">Direccion</string>
     <string name="distrito">Distrito</string>
     <string name="serie">Serie</string>
+
+    <string-array name="TDoc">
+        <item>Facturas</item>
+        <item>Nota de Crédito</item>
+        <item>Nota de Devito</item>
+        <item>Boletas de Venta</item>
+        <item>Letras</item>
+        <item>Cod</item>
+        <item>Cheque Diferido</item>
+    </string-array>
+
+    <string-array name="TPago">
+        <item>--Seleccione--</item>
+        <item>Efectivo</item>
+        <item>Cheque</item>
+    </string-array>
+
 </resources>

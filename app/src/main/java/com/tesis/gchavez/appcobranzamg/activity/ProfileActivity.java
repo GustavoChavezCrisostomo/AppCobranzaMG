@@ -6,16 +6,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.tesis.gchavez.appcobranzamg.R;
 import com.tesis.gchavez.appcobranzamg.models.Usuario;
 import com.tesis.gchavez.appcobranzamg.service.ApiService;
@@ -42,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public ProgressBar progressBar;
     public TextView userText;
+    public ImageView fotoImage;
     public TextView telfText;
     public TextView emailText;
     public TextView zoneText;
@@ -63,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.main_progress);
         userText = findViewById(R.id.name_text);
+        fotoImage = findViewById(R.id.foto_image);
         telfText = findViewById(R.id.phone_text);
         emailText = findViewById(R.id.email_text);
         zoneText = findViewById(R.id.zone_text);
@@ -86,6 +91,8 @@ public class ProfileActivity extends AppCompatActivity {
                         Log.d(TAG, "usuario: " + usuario);
 
                         userText.setText(usuario.getNombre());
+                        String url = ApiService.API_BASE_URL +"/images/" + usuario.getImagen();
+                        Picasso.get().load(url).into(fotoImage);
                         telfText.setText(usuario.getTelefono());
                         emailText.setText(usuario.getCorreo());
                         zoneText.setText(usuario.getZona());
