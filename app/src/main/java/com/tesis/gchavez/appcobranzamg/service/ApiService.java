@@ -3,6 +3,8 @@ package com.tesis.gchavez.appcobranzamg.service;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.models.Usuario;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -25,6 +27,9 @@ public interface  ApiService {
     Call<Usuario> showUsuario(@Path("id") Integer id);
 
     @GET("api/v1/name/{name}")
-    Call<Cliente> showName(@Path("name") String name);
+    Call<List<Cliente>> showName(@Path("name") String name);
+
+    @GET("api/v1/ruc/{ruc}")
+    Call<List<Cliente>> showRuc(@Path("ruc") String ruc);
 
 }

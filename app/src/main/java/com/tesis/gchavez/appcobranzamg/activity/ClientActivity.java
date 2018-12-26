@@ -39,6 +39,8 @@ public class ClientActivity extends AppCompatActivity {
     private EditText searchInput;
     private RadioGroup tipo;
     private String buscar;
+    private String idruc;
+    private String idname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,60 +63,26 @@ public class ClientActivity extends AppCompatActivity {
         }
 
         if (tipo.getCheckedRadioButtonId() == R.id.rbtn_ruc){
-            rptbuscarruc();
+            RadioButton id = findViewById(R.id.rbtn_ruc);
+            idruc = id.getText().toString();
+            rptbuscarruc(idruc,buscar);
         }else {
-
-            ApiService service = ApiServiceGenerator.createService(ApiService.class);
-
-            Call<Cliente> call = service.showName(buscar);
-
-            call.enqueue(new Callback<Cliente>() {
-                @Override
-                public void onResponse(Call<Cliente> call, Response<Cliente> response) {
-                    try {
-
-                        int statusCode = response.code();
-                        Log.d(TAG, "HTTP status code: " + statusCode);
-
-                        if (response.isSuccessful()) {
-
-                            Cliente cliente = response.body();
-                            Log.d(TAG, "cliente: " + cliente);
-
-                            rptbuscarname();
-
-                        } else {
-                            Log.e(TAG, "onError: " + response.errorBody().string());
-                            throw new Exception("Error en el servicio");
-                        }
-
-                    } catch (Throwable t) {
-                        try {
-                            Log.e(TAG, "onThrowable: " + t.toString(), t);
-                            Toast.makeText(ClientActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                        }catch (Throwable x){}
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Cliente> call, Throwable t) {
-                    Log.e(TAG, "onFailure: " + t.toString());
-                    Toast.makeText(ClientActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
+            RadioButton id = findViewById(R.id.rbtn_name);
+            idname = id.getText().toString();
+            rptbuscarname(idname,buscar);
 
         }
     }
 
-    private void rptbuscarruc() {
+    private void rptbuscarruc(String truc, String bruc) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame, ClientDetailFragment.newInstance());
+        transaction.replace(R.id.frame, ClientDetailFragment.newInstance(truc,bruc));
         transaction.commit();
     }
 
-    private void rptbuscarname() {
+    private void rptbuscarname(String tname, String bname) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame, ClientDetailFragment.newInstance());
+        transaction.replace(R.id.frame, ClientDetailFragment.newInstance(tname,bname));
         transaction.commit();
     }
 

@@ -48,7 +48,7 @@ public class SelectclienteActivity extends AppCompatActivity {
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameRUC, SelectclienteFragment.newInstance());
+        transaction.replace(R.id.frameRUC, SelectclienteFragment.newInstance(buscar));
         transaction.commit();
 
     }
