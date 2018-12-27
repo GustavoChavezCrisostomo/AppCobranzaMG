@@ -1,5 +1,6 @@
 package com.tesis.gchavez.appcobranzamg.service;
 
+import com.tesis.gchavez.appcobranzamg.models.Banco;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.models.Usuario;
 
@@ -31,5 +32,11 @@ public interface  ApiService {
 
     @GET("api/v1/ruc/{ruc}")
     Call<List<Cliente>> showRuc(@Path("ruc") String ruc);
+
+    @GET("api/v1/banco")
+    Call<List<Banco>> getBanco();
+
+    @GET("api/v1/cliente/{fchcob}")
+    Call<List<Cliente>> getCliente(@Path("fchcob") String fchcob);
 
 }

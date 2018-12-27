@@ -11,7 +11,7 @@ public class Cliente {
     private String telefono;
     private Double deuda;
     private String fchVenc;
-    private Date fchCobra;
+    private String fchCobra;
     private String observacion;
     private String longitud;
     private String latitud;
@@ -20,7 +20,7 @@ public class Cliente {
 
     }
 
-    public Cliente(Integer id, String nombre, String direccion, String distrito, String ruc, String telefono, Double deuda, String fchVenc, Date fchCobra, String observacion, String longitud, String latitud) {
+    public Cliente(Integer id, String nombre, String direccion, String distrito, String ruc, String telefono, Double deuda, String fchVenc, String fchCobra, String observacion, String longitud, String latitud) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -59,8 +59,8 @@ public class Cliente {
     public String getFchVenc() { return fchVenc; }
     public void setFchVenc(String fchVenc) { this.fchVenc = fchVenc; }
 
-    public Date getFchCobra() { return fchCobra; }
-    public void setFchCobra(Date fchCobra) { this.fchCobra = fchCobra; }
+    public String getFchCobra() { return fchCobra; }
+    public void setFchCobra(String fchCobra) { this.fchCobra = fchCobra; }
 
     public String getObservacion() { return observacion; }
     public void setObservacion(String observacion) { this.observacion = observacion; }

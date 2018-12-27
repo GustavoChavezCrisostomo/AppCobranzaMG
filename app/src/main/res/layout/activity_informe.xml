@@ -102,6 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/name_prueba"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -126,6 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/name_prueba"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -150,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/ruc_prueba"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
                         android:textSize="16sp" />
                 </LinearLayout>
 

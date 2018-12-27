@@ -16,13 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> {
+public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHolder> {
 
     private List<Cliente> clientes;
-    private FragmentActivity activity;
 
-    public PlaceAdapter(FragmentActivity activity){
-        this.activity = activity;
+    public ClientesAdapter(){
         this.clientes = new ArrayList<>();
     }
 
@@ -53,7 +51,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(PlaceAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ClientesAdapter.ViewHolder viewHolder, int position) {
 
         final Cliente cliente = this.clientes.get(position);
         viewHolder.clienteText.setText(String.valueOf(cliente.getNombre()));
@@ -72,8 +70,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
 
             @Override
             public void onClick(View v) {
-                clientes.remove(1);
-                notifyDataSetChanged();
+
             }
         });
 

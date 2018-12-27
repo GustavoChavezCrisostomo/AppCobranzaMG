@@ -40,6 +40,9 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
     private String mTipe;
     private String mBuscar;
 
+    private Button program;
+    private ImageButton datePicker;
+
     public ProgressBar progressBar;
     private EditText dateInput;
     private TextView nameText;
@@ -77,11 +80,17 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_client_detail, container, false);
 
+        if (mTipe.equals("RUC")){
+            resultRuc();
+        }else{ //mTipe.equals("Nombre")
+            resultName();
+        }
+
         dateInput = view.findViewById(R.id.date_input);
-        ImageButton datePicker = view.findViewById(R.id.btn_calender);
+        datePicker = view.findViewById(R.id.btn_calender);
         datePicker.setOnClickListener(this);
 
-        Button program = view.findViewById(R.id.btn_program);
+        program = view.findViewById(R.id.btn_program);
         program.setOnClickListener(this);
 
         progressBar = view.findViewById(R.id.main_progress);
@@ -90,12 +99,6 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
         deudaText = view.findViewById(R.id.txt_deuda);
         fchVenText = view.findViewById(R.id.txt_fchvenc);
         obsText = view.findViewById(R.id.txt_obs);
-
-        if (mTipe.equals("RUC")){
-            resultRuc();
-        }else{ //mTipe.equals("Nombre")
-            resultName();
-        }
 
         return view;
     }
@@ -117,11 +120,12 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because january is zero
-                final String selectedDate = day + " / " + (month+1) + " / " + year;
+                final String selectedDate = day + " - " + (month+1) + " - " + year;
                 dateInput.setText(selectedDate);
             }
         });
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+
     }
 
     private void programDate() {
@@ -160,6 +164,7 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                             cliente.add(client.getRuc());
                             cliente.add(client.getDeuda().toString());
                             cliente.add(client.getFchVenc());
+                            cliente.add(client.getFchCobra());
                             cliente.add(client.getObservacion());
                         }
 
@@ -167,7 +172,16 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                         rucText.setText(cliente.get(2));
                         deudaText.setText(cliente.get(3));
                         fchVenText.setText(cliente.get(4));
-                        obsText.setText(cliente.get(5));
+                        dateInput.setText(cliente.get(5));
+                        obsText.setText(cliente.get(6));
+
+                        if(cliente.get(5).isEmpty()){
+
+                        }else{
+                            Toast.makeText(getActivity(), "Ya tiene programación de cobranza", Toast.LENGTH_SHORT).show();
+                            program.setEnabled(false);
+                            datePicker.setEnabled(false);
+                        }
 
                         // ProgressBar Gone
                         getActivity().findViewById(R.id.main_progress).setVisibility(View.GONE);
@@ -229,6 +243,7 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                             cliente.add(client.getRuc());
                             cliente.add(client.getDeuda().toString());
                             cliente.add(client.getFchVenc());
+                            cliente.add(client.getFchCobra());
                             cliente.add(client.getObservacion());
                         }
 
@@ -236,7 +251,16 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                         rucText.setText(cliente.get(2));
                         deudaText.setText(cliente.get(3));
                         fchVenText.setText(cliente.get(4));
-                        obsText.setText(cliente.get(5));
+                        dateInput.setText(cliente.get(5));
+                        obsText.setText(cliente.get(6));
+
+                        if(cliente.get(5).isEmpty()){
+
+                        }else{
+                            Toast.makeText(getActivity(), "Ya tiene programación de cobranza", Toast.LENGTH_SHORT).show();
+                            program.setEnabled(false);
+                            datePicker.setEnabled(false);
+                        }
 
                         // ProgressBar Gone
                         getActivity().findViewById(R.id.main_progress).setVisibility(View.GONE);

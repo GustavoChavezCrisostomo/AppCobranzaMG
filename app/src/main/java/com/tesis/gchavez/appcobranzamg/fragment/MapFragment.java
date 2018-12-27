@@ -4,30 +4,49 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.tesis.gchavez.appcobranzamg.R;
 import com.tesis.gchavez.appcobranzamg.activity.SelectclienteActivity;
+import com.tesis.gchavez.appcobranzamg.adapters.ClientesAdapter;
+import com.tesis.gchavez.appcobranzamg.models.Cliente;
+import com.tesis.gchavez.appcobranzamg.service.ApiService;
+import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 public class MapFragment extends DialogFragment implements OnMapReadyCallback, View.OnClickListener {
 
+    private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1;
+
     private GoogleMap mMap;
     private TextView fchAct;
-    private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1;
+    private RecyclerView clientesList;
+    public ProgressBar progressBar;
 
     public MapFragment() {
         // Required empty public constructor
@@ -52,17 +71,80 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback, V
         SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
 
+        progressBar = view.findViewById(R.id.main_progress);
+
         Button program = view.findViewById(R.id.btn_programClient);
         program.setOnClickListener(this);
 
         Date d=new Date();
 
         fchAct= view.findViewById(R.id.txt_fchAct);
-        SimpleDateFormat fecc=new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat fecc=new SimpleDateFormat("dd-MM-yyyy");
         String fechacComplString = fecc.format(d);
         fchAct.setText(fechacComplString);
 
+        //lista de clientes en el recyclerView
+        clientesList = view.findViewById(R.id.list_client);
+        clientesList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        clientesList.setAdapter(new ClientesAdapter());
+        initialize(fechacComplString);
+
         return view;
+    }
+
+    public void initialize(String fchcob){
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
+
+        Call<List<Cliente>> call = service.getCliente(fchcob);
+
+        call.enqueue(new Callback<List<Cliente>>() {
+            @Override
+            public void onResponse(Call<List<Cliente>> call, Response<List<Cliente>> response) {
+                try {
+
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        List<Cliente> rescliente = response.body();
+                        Log.d(TAG, "res_client: " + rescliente);
+
+                        ClientesAdapter adapter = (ClientesAdapter) clientesList.getAdapter();
+                        adapter.setClientes(rescliente);
+                        adapter.notifyDataSetChanged();
+
+                        // ProgressBar Gone
+                        getActivity().findViewById(R.id.main_progress).setVisibility(View.GONE);
+
+                    } else {
+                        // ProgressBar Gone
+                        getActivity().findViewById(R.id.main_progress).setVisibility(View.GONE);
+
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("Registro no encontrado");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+
+                        // ProgressBar Gone
+                        getActivity().findViewById(R.id.main_progress).setVisibility(View.GONE);
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Cliente>> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString());
+                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+
+                // ProgressBar Gone
+                getActivity().findViewById(R.id.main_progress).setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override

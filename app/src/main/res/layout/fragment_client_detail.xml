@@ -17,7 +17,7 @@
         <ProgressBar
             android:id="@+id/main_progress"
             style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
@@ -38,13 +38,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/name" />
+                    android:text="@string/name"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:text="@string/name_prueba" />
             </LinearLayout>
 
@@ -59,13 +61,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/ruc" />
+                    android:text="@string/ruc"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_ruc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:text="@string/name_prueba" />
             </LinearLayout>
 
@@ -80,13 +84,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/deuda" />
+                    android:text="@string/deuda"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_deuda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:text="@string/name_prueba" />
             </LinearLayout>
 
@@ -101,13 +107,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/venc_deuda" />
+                    android:text="@string/venc_deuda"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_fchvenc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:text="@string/forma_fch" />
             </LinearLayout>
 
@@ -125,7 +133,8 @@
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/program_cob" />
+                android:text="@string/program_cob"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -185,7 +194,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:text="@string/observations" />
+                android:text="@string/observations"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/txt_obs"

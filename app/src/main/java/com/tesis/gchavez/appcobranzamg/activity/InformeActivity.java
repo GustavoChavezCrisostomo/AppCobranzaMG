@@ -3,9 +3,13 @@ package com.tesis.gchavez.appcobranzamg.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -13,13 +17,18 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tesis.gchavez.appcobranzamg.R;
+import com.tesis.gchavez.appcobranzamg.models.Banco;
+import com.tesis.gchavez.appcobranzamg.service.ApiService;
+import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class InformeActivity extends AppCompatActivity {
 
-    private Spinner doc,pago;
+    private static final String TAG = InformeActivity.class.getSimpleName();
+    private Spinner doc, pago, banco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,7 @@ public class InformeActivity extends AppCompatActivity {
             }
         });
 
+        //Spinner Tipo de Doc
         doc = findViewById(R.id.spinner_doc);
         List<String> listDoc = Arrays.asList(getResources().getStringArray(R.array.TDoc));
 
@@ -53,12 +63,17 @@ public class InformeActivity extends AppCompatActivity {
         spinnerAdapterDoc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         doc.setAdapter(spinnerAdapterDoc);
 
+        //Spinner Tipo de Pago
         pago = findViewById(R.id.spinner_tpago);
         List<String> listPago = Arrays.asList(getResources().getStringArray(R.array.TPago));
 
         ArrayAdapter<String> spinnerAdapterPago = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPago);
         spinnerAdapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pago.setAdapter(spinnerAdapterPago);
+
+        //Spinner Banco
+        banco = findViewById(R.id.spinner_bank);
+        iniBank();
 
     }
 
@@ -103,6 +118,34 @@ public class InformeActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    public void iniBank(){
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
+        Call<List<Banco>> call = service.getBanco();
+
+        call.enqueue(new Callback<List<Banco>>() {
+            @Override
+            public void onResponse(Call<List<Banco>> call, Response<List<Banco>> response) {
+
+                List<Banco> bancos = response.body();
+                Log.d(TAG, "Tecnicos: " + bancos);
+
+                List<String> list_bank = new ArrayList<String>();
+                for (Banco banco : bancos) {
+                    list_bank.add(banco.getNombre());
+                }
+
+                ArrayAdapter<String> spinnerAdapter_bank = new ArrayAdapter<String>(InformeActivity.this, android.R.layout.simple_spinner_item, list_bank);
+                spinnerAdapter_bank.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                banco.setAdapter(spinnerAdapter_bank);
+            }
+
+            @Override
+            public void onFailure(Call<List<Banco>> call, Throwable t) {
+
+            }
+        });
     }
 
 }

@@ -47,7 +47,7 @@ public class FormFragment extends DialogFragment implements View.OnClickListener
         fchAct = view.findViewById(R.id.txt_fchAct);
         Button agregar = view.findViewById(R.id.btn_agregar);
 
-        SimpleDateFormat fecc=new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat fecc=new SimpleDateFormat("dd-MM-yyyy");
         String fechacComplString = fecc.format(d);
         fchAct.setText(fechacComplString);
 
