@@ -131,7 +131,7 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
     private void programDate() {
         String date = dateInput.getText().toString();
 
-        if(date.isEmpty()){
+        if(date.equals("-")){
             Toast.makeText(getActivity(), "Completar el campo fecha", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -175,7 +175,7 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                         dateInput.setText(cliente.get(5));
                         obsText.setText(cliente.get(6));
 
-                        if(cliente.get(5).isEmpty()){
+                        if(cliente.get(5).equals("-")){
 
                         }else{
                             Toast.makeText(getActivity(), "Ya tiene programación de cobranza", Toast.LENGTH_SHORT).show();
@@ -254,7 +254,7 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                         dateInput.setText(cliente.get(5));
                         obsText.setText(cliente.get(6));
 
-                        if(cliente.get(5).isEmpty()){
+                        if(cliente.get(5).equals("-")){
 
                         }else{
                             Toast.makeText(getActivity(), "Ya tiene programación de cobranza", Toast.LENGTH_SHORT).show();

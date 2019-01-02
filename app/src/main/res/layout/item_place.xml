@@ -23,7 +23,9 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="14dp"
             android:text="@string/client"
-            android:textSize="14sp" />
+
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text"
@@ -34,6 +36,7 @@
             android:layout_marginStart="14dp"
             android:text="@string/ruc"
             android:textSize="14sp"
+            android:textStyle="bold"
             tools:ignore="RelativeOverlap" />
 
         <TextView
@@ -44,7 +47,8 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="14dp"
             android:text="@string/deuda"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_cliente"
@@ -53,6 +57,18 @@
             android:layout_alignTop="@+id/text1"
             android:layout_alignParentStart="true"
             android:layout_marginStart="81dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:text="@string/name_prueba" />
+
+        <TextView
+            android:id="@+id/txt_idClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/text1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="218dp"
+            android:layout_marginTop="0dp"
+            android:visibility="invisible"
             android:text="@string/name_prueba" />
 
         <TextView
@@ -63,6 +79,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="81dp"
             android:layout_marginTop="20dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:text="@string/ruc_prueba" />
 
         <TextView
@@ -73,6 +90,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="81dp"
             android:layout_marginTop="41dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:text="@string/money_prueba" />
 
         <ImageButton

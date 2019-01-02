@@ -76,8 +76,8 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback, V
         Button program = view.findViewById(R.id.btn_programClient);
         program.setOnClickListener(this);
 
+        //fecha actual
         Date d=new Date();
-
         fchAct= view.findViewById(R.id.txt_fchAct);
         SimpleDateFormat fecc=new SimpleDateFormat("dd-MM-yyyy");
         String fechacComplString = fecc.format(d);
