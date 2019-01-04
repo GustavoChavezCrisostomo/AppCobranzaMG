@@ -89,6 +89,11 @@ public class SelectclienteFragment extends DialogFragment implements View.OnClic
         addClientbtn = view.findViewById(R.id.btn_aceptarRUC);
         addClientbtn.setOnClickListener(this);
 
+        //fecha actual
+        Date d=new Date();
+        SimpleDateFormat fecc=new SimpleDateFormat("dd-MM-yyyy");
+        fchCobra = fecc.format(d);
+
         resultRuc();
 
         return view;
@@ -124,10 +129,8 @@ public class SelectclienteFragment extends DialogFragment implements View.OnClic
                             cliente.add(client.getObservacion());
                         }
 
-                        if(cliente.get(6).equals("-")){
-
-                        }else {
-                            Toast.makeText(getActivity(), "Ya esta seleccionado el RUC: " + mBuscar, Toast.LENGTH_SHORT).show();
+                        if (cliente.get(6).equals(fchCobra)){
+                            Toast.makeText(getActivity(), "Ya esta seleccionado el RUC: " + mBuscar + fchCobra, Toast.LENGTH_SHORT).show();
                             getView().setVisibility(View.GONE);
                         }
 
@@ -178,11 +181,6 @@ public class SelectclienteFragment extends DialogFragment implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        //fecha actual
-        Date d=new Date();
-        SimpleDateFormat fecc=new SimpleDateFormat("dd-MM-yyyy");
-        fchCobra = fecc.format(d);
-
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
         Call<ResponseMessage> call = null;

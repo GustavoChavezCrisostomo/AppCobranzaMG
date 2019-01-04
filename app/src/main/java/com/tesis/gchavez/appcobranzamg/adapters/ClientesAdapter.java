@@ -1,6 +1,5 @@
 package com.tesis.gchavez.appcobranzamg.adapters;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,6 @@ import android.widget.Toast;
 
 import com.tesis.gchavez.appcobranzamg.R;
 import com.tesis.gchavez.appcobranzamg.ResponseMessage;
-import com.tesis.gchavez.appcobranzamg.activity.RouteActivity;
-import com.tesis.gchavez.appcobranzamg.fragment.MapFragment;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.service.ApiService;
 import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
@@ -21,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,7 +62,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ClientesAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ClientesAdapter.ViewHolder viewHolder, final int position) {
 
         final Cliente cliente = this.clientes.get(position);
         viewHolder.clienteText.setText(String.valueOf(cliente.getNombre()));
@@ -85,7 +81,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHo
         viewHolder.btnBorrar.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 final String idClient = cliente.getId().toString();
                 String fchCobra = "-";
 
@@ -108,7 +104,10 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHo
                                 ResponseMessage responseMessage = response.body();
                                 Log.d(TAG, "responseMessage: " + responseMessage);
                                 //falta refrestar la lista
-                                
+                                clientes.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position,clientes.size());
+                                Toast.makeText(v.getContext(), "Se elimino de la lista al " + cliente.getNombre(), Toast.LENGTH_LONG).show();
 
                             } else {
                                 Log.e(TAG, "onError: " + response.errorBody().string());

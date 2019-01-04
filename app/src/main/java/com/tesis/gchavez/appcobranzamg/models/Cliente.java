@@ -1,7 +1,5 @@
 package com.tesis.gchavez.appcobranzamg.models;
 
-import java.util.Date;
-
 public class Cliente {
     private Integer id;
     private String nombre;

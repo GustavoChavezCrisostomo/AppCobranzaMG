@@ -3,6 +3,7 @@ package com.tesis.gchavez.appcobranzamg.service;
 import com.tesis.gchavez.appcobranzamg.ResponseMessage;
 import com.tesis.gchavez.appcobranzamg.models.Banco;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
+import com.tesis.gchavez.appcobranzamg.models.Cobranza;
 import com.tesis.gchavez.appcobranzamg.models.Usuario;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public interface  ApiService {
     //spenner banco
     @GET("api/v1/banco")
     Call<List<Banco>> getBanco();
-    //seleccion de cobra por fchacob
+    //seleccion de clientes por fchacob
     @GET("api/v1/cliente/{fchcob}")
     Call<List<Cliente>> getCliente(@Path("fchcob") String fchcob);
 
@@ -50,5 +51,8 @@ public interface  ApiService {
             @Path("idClient") String idClient,
             @Field("fchCobra") String fchCobra
     );
+
+    @GET("api/v1/cobranza/{fch}")
+    Call<List<Cobranza>> getCobranza(@Path("fch") String fch);
 
 }

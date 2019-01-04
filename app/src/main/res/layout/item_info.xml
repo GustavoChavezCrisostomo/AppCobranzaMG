@@ -23,7 +23,20 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="80dp"
             android:layout_marginTop="14dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:text="@string/name_prueba" />
+
+        <TextView
+            android:id="@+id/txt_idCobra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="166dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/name_prueba"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txt_ruc"
@@ -33,17 +46,30 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="56dp"
             android:layout_marginBottom="14dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:text="@string/ruc_prueba" />
 
         <TextView
-            android:id="@+id/txt_deuda"
+            android:id="@+id/txt_monto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="25dp"
-            android:layout_marginEnd="90dp"
-            android:text="@string/money_prueba" />
+            android:layout_marginEnd="80dp"
+            android:text="@string/money_prueba"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+        <TextView
+            android:id="@+id/txt_monto2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="3dp"
+            android:layout_toStartOf="@+id/txt_monto"
+            android:text="S/. "
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     </RelativeLayout>
 

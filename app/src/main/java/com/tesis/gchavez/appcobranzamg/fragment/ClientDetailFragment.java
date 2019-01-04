@@ -1,6 +1,7 @@
 package com.tesis.gchavez.appcobranzamg.fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -21,11 +22,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tesis.gchavez.appcobranzamg.R;
+import com.tesis.gchavez.appcobranzamg.ResponseMessage;
+import com.tesis.gchavez.appcobranzamg.activity.PrincipalActivity;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.service.ApiService;
 import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
@@ -39,6 +45,7 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
     // TODO: Rename and change types of parameters
     private String mTipe;
     private String mBuscar;
+    private String clienteId;
 
     private Button program;
     private ImageButton datePicker;
@@ -115,30 +122,6 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
         }
     }
 
-    private void showDatePickerDialog() {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                // +1 because january is zero
-                final String selectedDate = day + " - " + (month+1) + " - " + year;
-                dateInput.setText(selectedDate);
-            }
-        });
-        newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
-
-    }
-
-    private void programDate() {
-        String date = dateInput.getText().toString();
-
-        if(date.equals("-")){
-            Toast.makeText(getActivity(), "Completar el campo fecha", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Toast.makeText(getActivity(), "Se programó cobranza para la fecha " + date, Toast.LENGTH_SHORT).show();
-    }
-
     private void resultRuc(){
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
@@ -168,6 +151,7 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                             cliente.add(client.getObservacion());
                         }
 
+                        clienteId = cliente.get(0);
                         nameText.setText(cliente.get(1));
                         rucText.setText(cliente.get(2));
                         deudaText.setText(cliente.get(3));
@@ -247,6 +231,7 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                             cliente.add(client.getObservacion());
                         }
 
+                        clienteId = cliente.get(0);
                         nameText.setText(cliente.get(1));
                         rucText.setText(cliente.get(2));
                         deudaText.setText(cliente.get(3));
@@ -294,6 +279,87 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                 // ProgressBar Gone
                 getActivity().findViewById(R.id.main_progress).setVisibility(View.GONE);
             }
+        });
+    }
+
+    private void showDatePickerDialog() {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                // +1 because january is zero
+                String selectedDate;
+                switch (month){
+                    case 9:
+                        selectedDate = day+"-"+(month+1)+"-"+year;
+                        break;
+                    case 10:
+                        selectedDate = day+"-"+(month+1)+"-"+year;
+                        break;
+                    case 11:
+                        selectedDate = day+"-"+(month+1)+"-"+year;
+                        break;
+                        default:
+                            selectedDate = day+"-0"+(month+1)+"-"+year;
+                            break;
+                }
+                // +1 because january is zero
+                dateInput.setText(selectedDate);
+            }
+        });
+        newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+
+    }
+
+    private void programDate() {
+        final String date = dateInput.getText().toString();
+
+        if(date.equals("-")){
+            Toast.makeText(getActivity(), "Completar el campo fecha", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
+
+        Call<ResponseMessage> call = null;
+
+        call = service.addCliente(clienteId, date);
+
+        call.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                try {
+
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        ResponseMessage responseMessage = response.body();
+                        Log.d(TAG, "responseMessage: " + responseMessage);
+
+                        Toast.makeText(getActivity(), "Se programó cobranza para la fecha " + date, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), PrincipalActivity.class);
+                        startActivity(intent);
+
+                    } else {
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("Error en el servicio");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString());
+                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
         });
     }
 
