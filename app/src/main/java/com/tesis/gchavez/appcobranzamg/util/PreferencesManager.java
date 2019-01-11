@@ -29,11 +29,6 @@ public class PreferencesManager {
 
     public static final String PREF_ROLE = "role";
 
-    /**
-     * Crea una instancia de PreferencesManager a partir de un contexto
-     * @param context
-     * @return
-     */
     public static synchronized PreferencesManager getInstance(Context context){
         if(sInstance == null) {
             sInstance = new PreferencesManager(context);
@@ -41,10 +36,6 @@ public class PreferencesManager {
         return sInstance;
     }
 
-    /**
-     * Recupera una instancia de PreferencesManager anteriormente creada
-     * @return
-     */
     public static synchronized PreferencesManager getInstance() {
         if (sInstance == null) {
             throw new IllegalStateException(PreferencesManager.class.getSimpleName() +

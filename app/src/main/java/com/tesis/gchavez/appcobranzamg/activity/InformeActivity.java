@@ -59,7 +59,7 @@ public class InformeActivity extends AppCompatActivity {
         doc = findViewById(R.id.spinner_doc);
         List<String> listDoc = Arrays.asList(getResources().getStringArray(R.array.TDoc));
 
-        ArrayAdapter<String> spinnerAdapterDoc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listDoc);
+        ArrayAdapter<String> spinnerAdapterDoc = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listDoc);
         spinnerAdapterDoc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         doc.setAdapter(spinnerAdapterDoc);
 
@@ -67,7 +67,7 @@ public class InformeActivity extends AppCompatActivity {
         pago = findViewById(R.id.spinner_tpago);
         List<String> listPago = Arrays.asList(getResources().getStringArray(R.array.TPago));
 
-        ArrayAdapter<String> spinnerAdapterPago = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPago);
+        ArrayAdapter<String> spinnerAdapterPago = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listPago);
         spinnerAdapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pago.setAdapter(spinnerAdapterPago);
 
@@ -131,12 +131,12 @@ public class InformeActivity extends AppCompatActivity {
                 List<Banco> bancos = response.body();
                 Log.d(TAG, "Tecnicos: " + bancos);
 
-                List<String> list_bank = new ArrayList<String>();
+                List<String> list_bank = new ArrayList<>();
                 for (Banco banco : bancos) {
                     list_bank.add(banco.getNombre());
                 }
 
-                ArrayAdapter<String> spinnerAdapter_bank = new ArrayAdapter<String>(InformeActivity.this, android.R.layout.simple_spinner_item, list_bank);
+                ArrayAdapter<String> spinnerAdapter_bank = new ArrayAdapter<>(InformeActivity.this, android.R.layout.simple_spinner_item, list_bank);
                 spinnerAdapter_bank.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 banco.setAdapter(spinnerAdapter_bank);
             }

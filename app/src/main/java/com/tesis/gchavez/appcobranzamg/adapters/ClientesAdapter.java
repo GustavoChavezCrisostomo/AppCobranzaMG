@@ -87,7 +87,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHo
 
                 ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
-                Call<ResponseMessage> call = null;
+                Call<ResponseMessage> call;
 
                 call = service.addCliente(idClient, fchCobra);
 
@@ -103,7 +103,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHo
 
                                 ResponseMessage responseMessage = response.body();
                                 Log.d(TAG, "responseMessage: " + responseMessage);
-                                //falta refrestar la lista
+
                                 clientes.remove(position);
                                 notifyItemRemoved(position);
                                 notifyItemRangeChanged(position,clientes.size());
@@ -117,7 +117,9 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHo
                         } catch (Throwable t) {
                             try {
                                 Log.e(TAG, "onThrowable: " + t.toString(), t);
-                            }catch (Throwable x){}
+                            }catch (Throwable x){
+                                Log.e(TAG, "Error sistem: " + t.toString(), t);
+                            }
                         }
                     }
 

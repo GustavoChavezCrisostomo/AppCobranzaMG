@@ -3,6 +3,7 @@ package com.tesis.gchavez.appcobranzamg.fragment;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
 import com.tesis.gchavez.appcobranzamg.R;
 import com.tesis.gchavez.appcobranzamg.activity.SelectclienteActivity;
 import com.tesis.gchavez.appcobranzamg.adapters.ClientesAdapter;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -39,14 +42,15 @@ import retrofit2.Response;
 
 import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
-public class MapFragment extends DialogFragment implements OnMapReadyCallback, View.OnClickListener {
+public class MapFragment extends DialogFragment implements OnMapReadyCallback,GoogleMap.OnMyLocationClickListener, View.OnClickListener {
 
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1;
+
+    private List<Marker> markerList = new ArrayList<Marker>();
 
     private GoogleMap mMap;
     private TextView fchAct;
     private RecyclerView clientesList;
-    public ProgressBar progressBar;
 
     public MapFragment() {
         // Required empty public constructor
@@ -71,7 +75,7 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback, V
         SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
 
-        progressBar = view.findViewById(R.id.main_progress);
+        ProgressBar progressBar = view.findViewById(R.id.main_progress);
 
         Button program = view.findViewById(R.id.btn_programClient);
         program.setOnClickListener(this);
@@ -163,7 +167,16 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback, V
         }
 
         mMap.setMyLocationEnabled(true);
+        mMap.setTrafficEnabled(true);
+        mMap.setOnMyLocationClickListener(this);
 
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Double lat = location.getLatitude();
+        Double lon = location.getLongitude();
+        Log.d(TAG, "lat: " + lat +"\n long: " + lon);
     }
 
     @Override

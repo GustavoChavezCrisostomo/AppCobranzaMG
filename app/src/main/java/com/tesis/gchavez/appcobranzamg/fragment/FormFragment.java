@@ -87,7 +87,6 @@ public class FormFragment extends DialogFragment implements View.OnClickListener
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
         Call<List<Cobranza>> call = service.getCobranza(fchact);
-
         call.enqueue(new Callback<List<Cobranza>>() {
             @Override
             public void onResponse(Call<List<Cobranza>> call, Response<List<Cobranza>> response) {
@@ -98,11 +97,11 @@ public class FormFragment extends DialogFragment implements View.OnClickListener
 
                     if (response.isSuccessful()) {
 
-                        List<Cobranza> rescliente = response.body();
-                        Log.d(TAG, "res_cobranza: " + rescliente);
+                        List<Cobranza> rescobra = response.body();
+                        Log.d(TAG, "res_cobranza: " + rescobra);
 
                         InfosAdapter adapter = (InfosAdapter) infosList.getAdapter();
-                        adapter.setClientes(rescliente);
+                        adapter.setClientes(rescobra);
                         adapter.notifyDataSetChanged();
 
                         // ProgressBar Gone
