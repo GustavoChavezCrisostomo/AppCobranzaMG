@@ -27,6 +27,7 @@ import com.tesis.gchavez.appcobranzamg.activity.PrincipalActivity;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.service.ApiService;
 import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
+import com.tesis.gchavez.appcobranzamg.util.PreferencesManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -320,9 +321,10 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
 
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
-        Call<ResponseMessage> call = null;
+        Call<ResponseMessage> call;
+        String userid = PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
 
-        call = service.addCliente(clienteId, date);
+        call = service.addCliente(clienteId, date, userid);
 
         call.enqueue(new Callback<ResponseMessage>() {
             @Override
@@ -338,8 +340,6 @@ public class ClientDetailFragment extends DialogFragment implements View.OnClick
                         Log.d(TAG, "responseMessage: " + responseMessage);
 
                         Toast.makeText(getActivity(), "Se programó cobranza para la fecha " + date, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), PrincipalActivity.class);
-                        startActivity(intent);
 
                     } else {
                         Log.e(TAG, "onError: " + response.errorBody().string());

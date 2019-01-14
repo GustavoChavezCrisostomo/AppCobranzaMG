@@ -18,6 +18,7 @@ import com.tesis.gchavez.appcobranzamg.activity.RouteActivity;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.service.ApiService;
 import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
+import com.tesis.gchavez.appcobranzamg.util.PreferencesManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -130,7 +131,7 @@ public class SelectclienteFragment extends DialogFragment implements View.OnClic
                         }
 
                         if (cliente.get(6).equals(fchCobra)){
-                            Toast.makeText(getActivity(), "Ya esta seleccionado el RUC: " + mBuscar + fchCobra, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Ya esta seleccionado el RUC: " + mBuscar , Toast.LENGTH_SHORT).show();
                             getView().setVisibility(View.GONE);
                         }
 
@@ -183,9 +184,10 @@ public class SelectclienteFragment extends DialogFragment implements View.OnClic
     public void onClick(View v) {
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
-        Call<ResponseMessage> call = null;
+        Call<ResponseMessage> call;
+        String userid = PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
 
-        call = service.addCliente(idClient, fchCobra);
+        call = service.addCliente(idClient, fchCobra, userid);
 
         call.enqueue(new Callback<ResponseMessage>() {
             @Override

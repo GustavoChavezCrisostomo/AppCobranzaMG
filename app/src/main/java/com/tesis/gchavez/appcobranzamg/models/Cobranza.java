@@ -6,7 +6,7 @@ public class Cobranza {
     private Integer usuario_id;
     private String serie;
     private String fecha;
-    private Integer tipo;
+    private String tipo;
     private String numDoc;
     private Integer cliente_id;
     private String distritoCli;
@@ -22,7 +22,7 @@ public class Cobranza {
 
     }
 
-    public Cobranza(Integer id, Integer usuario_id, String serie, String fecha, Integer tipo, String numDoc, Integer cliente_id, String distritoCli, String rucCli, String tipoPago, Double monto, String numCheque, Integer banco_id, String numOpe, String observaciones) {
+    public Cobranza(Integer id, Integer usuario_id, String serie, String fecha, String tipo, String numDoc, Integer cliente_id, String distritoCli, String rucCli, String tipoPago, Double monto, String numCheque, Integer banco_id, String numOpe, String observaciones) {
         this.id = id;
         this.usuario_id = usuario_id;
         this.serie = serie;
@@ -52,8 +52,8 @@ public class Cobranza {
     public String getFecha() { return fecha; }
     public void setFecha(String fecha) { this.fecha = fecha; }
 
-    public Integer getTipo() { return tipo; }
-    public void setTipo(Integer tipo) { this.tipo = tipo; }
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
 
     public String getNumDoc() { return numDoc; }
     public void setNumDoc(String numDoc) { this.numDoc = numDoc; }

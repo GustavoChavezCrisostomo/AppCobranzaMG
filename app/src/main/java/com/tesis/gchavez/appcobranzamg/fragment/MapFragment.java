@@ -24,6 +24,7 @@ import com.tesis.gchavez.appcobranzamg.adapters.ClientesAdapter;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.service.ApiService;
 import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
+import com.tesis.gchavez.appcobranzamg.util.PreferencesManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -99,7 +100,9 @@ public class MapFragment extends DialogFragment implements OnMapReadyCallback,Go
     public void initialize(String fchcob){
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
-        Call<List<Cliente>> call = service.getCliente(fchcob);
+        String userid = PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
+
+        Call<List<Cliente>> call = service.getCliente(fchcob,userid);
 
         call.enqueue(new Callback<List<Cliente>>() {
             @Override

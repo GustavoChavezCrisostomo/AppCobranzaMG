@@ -84,12 +84,12 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHo
             public void onClick(final View v) {
                 final String idClient = cliente.getId().toString();
                 String fchCobra = "-";
-
+                String user = "0";
                 ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
                 Call<ResponseMessage> call;
 
-                call = service.addCliente(idClient, fchCobra);
+                call = service.addCliente(idClient, fchCobra , user);
 
                 call.enqueue(new Callback<ResponseMessage>() {
                     @Override
