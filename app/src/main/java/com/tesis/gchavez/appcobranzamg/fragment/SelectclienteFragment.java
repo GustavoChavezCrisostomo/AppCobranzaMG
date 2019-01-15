@@ -33,24 +33,20 @@ import retrofit2.Response;
 import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 public class SelectclienteFragment extends DialogFragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM2 = "buscar";
 
-    // TODO: Rename and change types of parameters
     private String mBuscar;
     private String idClient;
     private String nameCli;
     private String fchCobra;
 
-    public ProgressBar progressBar;
     private TextView nameText;
     private TextView direcText;
     private TextView distriText;
     private TextView deudaText;
     private TextView fchVenText;
     private EditText obsText;
-    private Button addClientbtn;
 
 
     public SelectclienteFragment() {
@@ -79,7 +75,7 @@ public class SelectclienteFragment extends DialogFragment implements View.OnClic
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_selectcliente, container, false);
 
-        progressBar = view.findViewById(R.id.main_progress);
+        ProgressBar progressBar = view.findViewById(R.id.main_progress);
         nameText = view.findViewById(R.id.txt_name);
         direcText = view.findViewById(R.id.txt_direccion);
         distriText = view.findViewById(R.id.txt_distrito);
@@ -87,7 +83,7 @@ public class SelectclienteFragment extends DialogFragment implements View.OnClic
         fchVenText = view.findViewById(R.id.txt_fchvenc);
         obsText = view.findViewById(R.id.txt_obs);
 
-        addClientbtn = view.findViewById(R.id.btn_aceptarRUC);
+        Button addClientbtn = view.findViewById(R.id.btn_aceptarRUC);
         addClientbtn.setOnClickListener(this);
 
         //fecha actual

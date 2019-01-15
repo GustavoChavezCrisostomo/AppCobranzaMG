@@ -36,8 +36,7 @@ public class InformeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_informe);
         setTitle("Informe" );
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -58,7 +57,6 @@ public class InformeActivity extends AppCompatActivity {
         //Spinner Tipo de Doc
         doc = findViewById(R.id.spinner_doc);
         List<String> listDoc = Arrays.asList(getResources().getStringArray(R.array.TDoc));
-
         ArrayAdapter<String> spinnerAdapterDoc = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listDoc);
         spinnerAdapterDoc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         doc.setAdapter(spinnerAdapterDoc);
@@ -66,7 +64,6 @@ public class InformeActivity extends AppCompatActivity {
         //Spinner Tipo de Pago
         pago = findViewById(R.id.spinner_tpago);
         List<String> listPago = Arrays.asList(getResources().getStringArray(R.array.TPago));
-
         ArrayAdapter<String> spinnerAdapterPago = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listPago);
         spinnerAdapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pago.setAdapter(spinnerAdapterPago);
@@ -105,7 +102,9 @@ public class InformeActivity extends AppCompatActivity {
             //corregir
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
+                saveDB();
                 Toast.makeText(InformeActivity.this,"Se guardo conforme",Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 
@@ -146,6 +145,10 @@ public class InformeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void saveDB(){
+
     }
 
 }

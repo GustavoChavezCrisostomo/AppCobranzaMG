@@ -86,7 +86,9 @@ public class FormFragment extends DialogFragment implements View.OnClickListener
     public void initialize(String fchact){
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
-        Call<List<Cobranza>> call = service.getCobranza(fchact);
+        String userid = PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
+
+        Call<List<Cobranza>> call = service.getCobranza(fchact, userid);
         call.enqueue(new Callback<List<Cobranza>>() {
             @Override
             public void onResponse(Call<List<Cobranza>> call, Response<List<Cobranza>> response) {

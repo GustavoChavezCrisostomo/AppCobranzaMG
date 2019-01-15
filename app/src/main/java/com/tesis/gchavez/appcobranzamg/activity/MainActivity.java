@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText loginInput;
     private EditText passwordInput;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginInput = (EditText) findViewById(R.id.login_input);
         passwordInput = (EditText)findViewById(R.id.password_input);
+        btnLogin = findViewById(R.id.btn_login);
 
         // Verificar si ya está LOGUEADO
         if(PreferencesManager.getInstance().get(PreferencesManager.PREF_ISLOGGED) != null){
@@ -46,9 +49,11 @@ public class MainActivity extends AppCompatActivity {
     public void callLogin(View view) {
         String login = loginInput.getText().toString();
         String password = passwordInput.getText().toString();
+        btnLogin.setEnabled(false);
 
         if(login.isEmpty() || password.isEmpty()){
             Toast.makeText(this, "Completar los campos requeridos", Toast.LENGTH_SHORT).show();
+            btnLogin.setEnabled(true);
             return;
         }
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
@@ -80,12 +85,14 @@ public class MainActivity extends AppCompatActivity {
                         finish();
 
                     } else {
+                        btnLogin.setEnabled(true);
                         Log.e(TAG, "onError: " + response.errorBody().string());
-                        throw new Exception("Error en el servicio");
+                        throw new Exception("Usuario y/o contraseña erroneo");
                     }
 
                 } catch (Throwable t) {
                     try {
+                        btnLogin.setEnabled(true);
                         Log.e(TAG, "onThrowable: " + t.toString(), t);
                         Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }catch (Throwable x){}

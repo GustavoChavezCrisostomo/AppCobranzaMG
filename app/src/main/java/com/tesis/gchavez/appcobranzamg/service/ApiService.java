@@ -18,8 +18,8 @@ import retrofit2.http.Path;
 
 public interface  ApiService {
 
-    String API_BASE_URL = "https://montgroup.pe/api/public/";
-    //String API_BASE_URL = "https://mgcobranza-gustavoch25.c9users.io/";
+    //String API_BASE_URL = "https://montgroup.pe/api/public/";
+    String API_BASE_URL = "https://mgcobranza-gustavoch25.c9users.io/";
 
 
     @FormUrlEncoded
@@ -55,7 +55,10 @@ public interface  ApiService {
             @Field("user") String user
     );
 
-    @GET("api/v1/cobranza/{fch}")
-    Call<List<Cobranza>> getCobranza(@Path("fch") String fch);
+    @GET("api/v1/cobranza/{fch}/{user}")
+    Call<List<Cobranza>> getCobranza(
+            @Path("fch") String fch,
+            @Path("user") String user
+    );
 
 }
