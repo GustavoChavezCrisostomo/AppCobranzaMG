@@ -4,6 +4,7 @@ import com.tesis.gchavez.appcobranzamg.ResponseMessage;
 import com.tesis.gchavez.appcobranzamg.models.Banco;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.models.Cobranza;
+import com.tesis.gchavez.appcobranzamg.models.Documento;
 import com.tesis.gchavez.appcobranzamg.models.Usuario;
 
 import java.util.List;
@@ -60,5 +61,8 @@ public interface  ApiService {
             @Path("fch") String fch,
             @Path("user") String user
     );
+
+    @GET("api/v1/doc/{id}")
+    Call<Documento> show(@Path("id") Integer id);
 
 }

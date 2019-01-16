@@ -9,6 +9,7 @@
     <item
         android:id="@+id/save"
         android:icon="@drawable/ic_save"
+        android:enabled="false"
         android:title="Save"
         app:showAsAction="ifRoom" />
 

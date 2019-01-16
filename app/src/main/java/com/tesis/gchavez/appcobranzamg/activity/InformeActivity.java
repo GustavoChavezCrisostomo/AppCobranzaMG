@@ -10,14 +10,18 @@ import retrofit2.Response;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tesis.gchavez.appcobranzamg.R;
 import com.tesis.gchavez.appcobranzamg.models.Banco;
+import com.tesis.gchavez.appcobranzamg.models.Documento;
 import com.tesis.gchavez.appcobranzamg.service.ApiService;
 import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
 
@@ -25,10 +29,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
+
 public class InformeActivity extends AppCompatActivity {
 
     private static final String TAG = InformeActivity.class.getSimpleName();
-    private Spinner doc, pago, banco;
+
+    private BottomNavigationView bottomNavigationView;
+    private Spinner banco;
+    private EditText docSeach;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +45,8 @@ public class InformeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_informe);
         setTitle("Informe" );
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        docSeach = findViewById(R.id.numDoc_input);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -55,14 +65,14 @@ public class InformeActivity extends AppCompatActivity {
         });
 
         //Spinner Tipo de Doc
-        doc = findViewById(R.id.spinner_doc);
+        Spinner doc = findViewById(R.id.spinner_doc);
         List<String> listDoc = Arrays.asList(getResources().getStringArray(R.array.TDoc));
         ArrayAdapter<String> spinnerAdapterDoc = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listDoc);
         spinnerAdapterDoc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         doc.setAdapter(spinnerAdapterDoc);
 
         //Spinner Tipo de Pago
-        pago = findViewById(R.id.spinner_tpago);
+        Spinner pago = findViewById(R.id.spinner_tpago);
         List<String> listPago = Arrays.asList(getResources().getStringArray(R.array.TPago));
         ArrayAdapter<String> spinnerAdapterPago = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listPago);
         spinnerAdapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,6 +81,63 @@ public class InformeActivity extends AppCompatActivity {
         //Spinner Banco
         banco = findViewById(R.id.spinner_bank);
         iniBank();
+
+    }
+
+    public void callSearchDoc(View view){
+        final String doc = docSeach.getText().toString();
+
+        if(doc.isEmpty()){
+            Toast.makeText(this, "Completar el num de documento", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
+
+        Call<Documento> call = service.show( Integer.parseInt(doc));
+
+        call.enqueue(new Callback<Documento>() {
+            @Override
+            public void onResponse(Call<Documento> call, Response<Documento> response) {
+                try {
+
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        Documento documento = response.body();
+                        Log.d(TAG, "document: " + documento);
+
+                        Menu miMenu= bottomNavigationView.getMenu();
+                        miMenu.findItem(R.id.save).setEnabled(true);
+
+                        Toast.makeText(InformeActivity.this, "Buscar" + doc, Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        docSeach.getText().clear();
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("N° documento no encontrado");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        docSeach.getText().clear();
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(InformeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Documento> call, Throwable t) {
+                docSeach.getText().clear();
+                Log.e(TAG, "onFailure: " + t.toString());
+                Toast.makeText(InformeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
 
     }
 

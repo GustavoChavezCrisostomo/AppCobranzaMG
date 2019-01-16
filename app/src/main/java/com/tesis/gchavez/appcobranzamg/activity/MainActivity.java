@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         PreferencesManager.getInstance(this);
 
-        loginInput = (EditText) findViewById(R.id.login_input);
-        passwordInput = (EditText)findViewById(R.id.password_input);
+        loginInput = findViewById(R.id.login_input);
+        passwordInput = findViewById(R.id.password_input);
         btnLogin = findViewById(R.id.btn_login);
 
         // Verificar si ya está LOGUEADO
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
-        Call<Usuario> call = null;
+        Call<Usuario> call;
 
         call = service.login(login, password);
 
