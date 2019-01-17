@@ -50,7 +50,7 @@
     <string name="serie">Serie</string>
 
     <string-array name="TDoc">
-        <item>Facturas</item>
+        <item>Factura</item>
         <item>Nota de Crédito</item>
         <item>Nota de Devito</item>
         <item>Boletas de Venta</item>

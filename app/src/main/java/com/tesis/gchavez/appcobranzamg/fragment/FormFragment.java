@@ -33,6 +33,10 @@ import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 public class FormFragment extends DialogFragment implements View.OnClickListener {
 
+    public String userid;
+    public String fechacComplString;
+    public String serie = "12564";
+
     private TextView fchAct;
     private TextView nameText;
     private RecyclerView infosList;
@@ -64,12 +68,14 @@ public class FormFragment extends DialogFragment implements View.OnClickListener
 
         //fecha actual
         SimpleDateFormat fecc=new SimpleDateFormat("dd-MM-yyyy");
-        String fechacComplString = fecc.format(d);
+        fechacComplString = fecc.format(d);
         fchAct.setText(fechacComplString);
 
         //nombre del cobrador
         String name = PreferencesManager.getInstance().get(PreferencesManager.PREF_FULLNAME);
         nameText.setText(name);
+        //id user
+        userid = PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
 
         //btn agregar info
         agregar.setOnClickListener(this);
@@ -85,8 +91,6 @@ public class FormFragment extends DialogFragment implements View.OnClickListener
 
     public void initialize(String fchact){
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
-
-        String userid = PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
 
         Call<List<Cobranza>> call = service.getCobranza(fchact, userid);
         call.enqueue(new Callback<List<Cobranza>>() {

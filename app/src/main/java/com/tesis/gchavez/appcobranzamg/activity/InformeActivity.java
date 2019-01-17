@@ -16,28 +16,45 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tesis.gchavez.appcobranzamg.R;
+import com.tesis.gchavez.appcobranzamg.fragment.FormFragment;
 import com.tesis.gchavez.appcobranzamg.models.Banco;
+import com.tesis.gchavez.appcobranzamg.models.Cliente;
+import com.tesis.gchavez.appcobranzamg.models.Cobranza;
 import com.tesis.gchavez.appcobranzamg.models.Documento;
 import com.tesis.gchavez.appcobranzamg.service.ApiService;
 import com.tesis.gchavez.appcobranzamg.service.ApiServiceGenerator;
+import com.tesis.gchavez.appcobranzamg.util.PreferencesManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-
-import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 public class InformeActivity extends AppCompatActivity {
 
     private static final String TAG = InformeActivity.class.getSimpleName();
+    private String clientId;
 
     private BottomNavigationView bottomNavigationView;
+    private Spinner tDoc;
+    private Spinner pago;
     private Spinner banco;
     private EditText docSeach;
+    private EditText montoInput;
+    private EditText chequeInput;
+    private EditText opeInpt;
+    private EditText obsInput;
+    private TextView nameText;
+    private TextView lugarTxt;
+    private TextView rucTxt;
+
+    private String numDoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +63,13 @@ public class InformeActivity extends AppCompatActivity {
         setTitle("Informe" );
 
         docSeach = findViewById(R.id.numDoc_input);
+        montoInput = findViewById(R.id.monto_input);
+        chequeInput = findViewById(R.id.numcheque_input);
+        opeInpt = findViewById(R.id.numOpe_input);
+        obsInput = findViewById(R.id.txt_obsc);
+        nameText = findViewById(R.id.txt_name);
+        lugarTxt = findViewById(R.id.txt_lugar);
+        rucTxt = findViewById(R.id.txt_ruc);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -65,14 +89,14 @@ public class InformeActivity extends AppCompatActivity {
         });
 
         //Spinner Tipo de Doc
-        Spinner doc = findViewById(R.id.spinner_doc);
+        tDoc = findViewById(R.id.spinner_doc);
         List<String> listDoc = Arrays.asList(getResources().getStringArray(R.array.TDoc));
         ArrayAdapter<String> spinnerAdapterDoc = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listDoc);
         spinnerAdapterDoc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        doc.setAdapter(spinnerAdapterDoc);
+        tDoc.setAdapter(spinnerAdapterDoc);
 
         //Spinner Tipo de Pago
-        Spinner pago = findViewById(R.id.spinner_tpago);
+        pago = findViewById(R.id.spinner_tpago);
         List<String> listPago = Arrays.asList(getResources().getStringArray(R.array.TPago));
         ArrayAdapter<String> spinnerAdapterPago = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listPago);
         spinnerAdapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -85,16 +109,16 @@ public class InformeActivity extends AppCompatActivity {
     }
 
     public void callSearchDoc(View view){
-        final String doc = docSeach.getText().toString();
+        numDoc = docSeach.getText().toString();
 
-        if(doc.isEmpty()){
+        if(numDoc.isEmpty()){
             Toast.makeText(this, "Completar el num de documento", Toast.LENGTH_SHORT).show();
             return;
         }
 
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
-        Call<Documento> call = service.show( Integer.parseInt(doc));
+        Call<Documento> call = service.show( Integer.parseInt(numDoc));
 
         call.enqueue(new Callback<Documento>() {
             @Override
@@ -105,17 +129,31 @@ public class InformeActivity extends AppCompatActivity {
                     Log.d(TAG, "HTTP status code: " + statusCode);
 
                     if (response.isSuccessful()) {
-
+                        //datos del documento
                         Documento documento = response.body();
                         Log.d(TAG, "document: " + documento);
 
                         Menu miMenu= bottomNavigationView.getMenu();
                         miMenu.findItem(R.id.save).setEnabled(true);
+                        //datos del cliente
+                        List<Cliente> cli = new ArrayList<>();
+                        cli.add(documento.getCliente_c());
+                        Log.d(TAG, "client: " + cli);
 
-                        Toast.makeText(InformeActivity.this, "Buscar" + doc, Toast.LENGTH_SHORT).show();
+                        clientId = cli.get(0).getId().toString();
+                        nameText.setText( cli.get(0).getNombre());
+                        lugarTxt.setText(cli.get(0).getDistrito());
+                        rucTxt.setText(cli.get(0).getRuc());
 
                     } else {
                         docSeach.getText().clear();
+                        nameText.setText("aaaaaaa");
+                        lugarTxt.setText("aaaaaaa");
+                        rucTxt.setText("545485451257");
+
+                        Menu miMenu= bottomNavigationView.getMenu();
+                        miMenu.findItem(R.id.save).setEnabled(false);
+
                         Log.e(TAG, "onError: " + response.errorBody().string());
                         throw new Exception("N° documento no encontrado");
                     }
@@ -123,6 +161,8 @@ public class InformeActivity extends AppCompatActivity {
                 } catch (Throwable t) {
                     try {
                         docSeach.getText().clear();
+                        Menu miMenu= bottomNavigationView.getMenu();
+                        miMenu.findItem(R.id.save).setEnabled(false);
                         Log.e(TAG, "onThrowable: " + t.toString(), t);
                         Toast.makeText(InformeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
@@ -133,6 +173,8 @@ public class InformeActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Documento> call, Throwable t) {
                 docSeach.getText().clear();
+                Menu miMenu= bottomNavigationView.getMenu();
+                miMenu.findItem(R.id.save).setEnabled(false);
                 Log.e(TAG, "onFailure: " + t.toString());
                 Toast.makeText(InformeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
@@ -163,6 +205,13 @@ public class InformeActivity extends AppCompatActivity {
     }
 
     public void save(){
+
+        String tipePago = pago.getSelectedItem().toString();
+        if(tipePago.equalsIgnoreCase("--Seleccione--")){
+            Toast.makeText(this, "Completar el tipo de pago", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("¿Seguro de guardar el informe?");
         alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
@@ -215,6 +264,64 @@ public class InformeActivity extends AppCompatActivity {
     }
 
     public void saveDB(){
+
+        Date d=new Date();
+        SimpleDateFormat fecc=new SimpleDateFormat("dd-MM-yyyy");
+        final String fchAct = fecc.format(d);
+
+        final String userid =PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
+        final String serie = "123548";
+        final String tipeDoc = tDoc.getSelectedItem().toString();
+        final String lugar = lugarTxt.getText().toString();
+        final String ruc = rucTxt.getText().toString();
+        final String tipePago = pago.getSelectedItem().toString();
+        final double monto = Double.parseDouble(montoInput.getText().toString());
+        final String nCheque = chequeInput.getText().toString();
+        final int banco_id = banco.getSelectedItemPosition() + 1;//+1 porq en posicioon inicia en 0
+        final String nOpe = opeInpt.getText().toString();
+        final String obs = obsInput.getText().toString();
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
+
+        Call<Cobranza> call = null;
+
+        call = service.store(userid, serie, fchAct,tipeDoc,numDoc,Integer.parseInt(clientId),lugar,ruc,tipePago,monto,nCheque,banco_id,nOpe,obs);
+
+        call.enqueue(new Callback<Cobranza>() {
+            @Override
+            public void onResponse(Call<Cobranza> call, Response<Cobranza> response) {
+                try {
+
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        Cobranza responseMessage = response.body();
+                        Log.d(TAG, "responseMessage: " + responseMessage);
+                        Log.d(TAG, "create: " + userid +"/"+ fchAct +"/"+ serie +"/"+ numDoc +"/"+ tipeDoc +"/"+ clientId +"/"+ lugar +"/"+ ruc +"/"+ tipePago +"/"+ monto +"/"+ nCheque +"/"+ banco_id +"/"+ nOpe +"/"+ obs);
+
+
+                    } else {
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("Error en el servicio");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(InformeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cobranza> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString());
+                Toast.makeText(InformeActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+        });
 
     }
 

@@ -111,7 +111,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView39"
+                        android:id="@+id/txt_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -136,7 +136,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView42"
+                        android:id="@+id/txt_lugar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -161,7 +161,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView43"
+                        android:id="@+id/txt_ruc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

@@ -47,7 +47,7 @@ public interface  ApiService {
             @Path("fchcob") String fchcob,
             @Path("user") String user
     );
-
+    //lista de cliente
     @FormUrlEncoded
     @PUT("api/v1/client/{idClient}")
     Call<ResponseMessage> addCliente(
@@ -55,14 +55,32 @@ public interface  ApiService {
             @Field("fchCobra") String fchCobra,
             @Field("user") String user
     );
-
+    //List de cobranza
     @GET("api/v1/cobranza/{fch}/{user}")
     Call<List<Cobranza>> getCobranza(
             @Path("fch") String fch,
             @Path("user") String user
     );
-
+    //selecctor de documento
     @GET("api/v1/doc/{id}")
     Call<Documento> show(@Path("id") Integer id);
-
+    //crear informe cobranza
+    @FormUrlEncoded
+    @POST("api/v1/cobra")
+    Call<Cobranza> store(
+            @Field("userid") String usuario_id,
+            @Field("serie") String serie,
+            @Field("fchAct") String fecha,
+            @Field("tipeDoc") String tipo,
+            @Field("numDoc") String numDoc,
+            @Field("clientId") Integer cliente_id,
+            @Field("lugar") String distritoCli,
+            @Field("ruc") String rucCli,
+            @Field("tipePago") String tipoPago,
+            @Field("monto") Double monto,
+            @Field("nCheque") String numCheque,
+            @Field("banco_id") Integer banco_id,
+            @Field("nOpe") String numOpe,
+            @Field("obs") String observaciones
+    );
 }
