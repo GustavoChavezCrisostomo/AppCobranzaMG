@@ -22,16 +22,16 @@ public class InfosAdapter extends RecyclerView.Adapter<InfosAdapter.ViewHolder> 
         this.cobranzas = new ArrayList<>();
     }
 
-    public void setClientes(List<Cobranza> clientes){this.cobranzas = clientes;}
+    public void setCobranzas(List<Cobranza> cobranzas){this.cobranzas = cobranzas;}
 
-    public class ViewHolder extends  RecyclerView.ViewHolder{
+    class ViewHolder extends  RecyclerView.ViewHolder{
 
-        public TextView clienteText;
-        public TextView rucText;
-        public TextView montoText;
-        public TextView idCobraText;
+        private TextView clienteText;
+        private TextView rucText;
+        private TextView montoText;
+        private TextView idCobraText;
 
-        public ViewHolder(View itemView){
+        ViewHolder(View itemView){
             super(itemView);
             clienteText = itemView.findViewById(R.id.txt_cliente);
             rucText = itemView.findViewById(R.id.txt_ruc);
@@ -52,7 +52,7 @@ public class InfosAdapter extends RecyclerView.Adapter<InfosAdapter.ViewHolder> 
     public void onBindViewHolder(InfosAdapter.ViewHolder viewHolder, int position) {
 
         final Cobranza cobranza = this.cobranzas.get(position);
-        viewHolder.clienteText.setText(String.valueOf(cobranza.getCliente_id()));
+        viewHolder.clienteText.setText(String.valueOf(cobranza.getCliente_a().getNombre()));
         viewHolder.rucText.setText(String.valueOf(cobranza.getRucCli()));
         viewHolder.montoText.setText(String.valueOf(cobranza.getMonto()));
         viewHolder.idCobraText.setText(String.valueOf(cobranza.getId()));

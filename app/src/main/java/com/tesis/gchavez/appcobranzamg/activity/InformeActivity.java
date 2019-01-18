@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tesis.gchavez.appcobranzamg.R;
-import com.tesis.gchavez.appcobranzamg.fragment.FormFragment;
 import com.tesis.gchavez.appcobranzamg.models.Banco;
 import com.tesis.gchavez.appcobranzamg.models.Cliente;
 import com.tesis.gchavez.appcobranzamg.models.Cobranza;
@@ -39,7 +38,7 @@ import java.util.List;
 public class InformeActivity extends AppCompatActivity {
 
     private static final String TAG = InformeActivity.class.getSimpleName();
-    private String clientId;
+    private String cliente_id;
 
     private BottomNavigationView bottomNavigationView;
     private Spinner tDoc;
@@ -135,12 +134,13 @@ public class InformeActivity extends AppCompatActivity {
 
                         Menu miMenu= bottomNavigationView.getMenu();
                         miMenu.findItem(R.id.save).setEnabled(true);
+
                         //datos del cliente
                         List<Cliente> cli = new ArrayList<>();
                         cli.add(documento.getCliente_c());
                         Log.d(TAG, "client: " + cli);
 
-                        clientId = cli.get(0).getId().toString();
+                        cliente_id = cli.get(0).getId().toString();
                         nameText.setText( cli.get(0).getNombre());
                         lugarTxt.setText(cli.get(0).getDistrito());
                         rucTxt.setText(cli.get(0).getRuc());
@@ -205,13 +205,6 @@ public class InformeActivity extends AppCompatActivity {
     }
 
     public void save(){
-
-        String tipePago = pago.getSelectedItem().toString();
-        if(tipePago.equalsIgnoreCase("--Seleccione--")){
-            Toast.makeText(this, "Completar el tipo de pago", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("¿Seguro de guardar el informe?");
         alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
@@ -219,8 +212,6 @@ public class InformeActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 saveDB();
-                Toast.makeText(InformeActivity.this,"Se guardo conforme",Toast.LENGTH_LONG).show();
-                finish();
             }
         });
 
@@ -265,27 +256,50 @@ public class InformeActivity extends AppCompatActivity {
 
     public void saveDB(){
 
+        String precio = montoInput.getText().toString();
+        String nCheque = chequeInput.getText().toString();
+        String nOpe = opeInpt.getText().toString();
+        String obs = obsInput.getText().toString();
+        if(precio.isEmpty()){
+            precio = "0";
+        }
+        if (nCheque.isEmpty()){
+            nCheque = "0";
+        }
+        if (nOpe.isEmpty()){
+            nOpe = "0";
+        }
+        if (obs.isEmpty()){
+            obs = "Sin observacion";
+        }
+
         Date d=new Date();
         SimpleDateFormat fecc=new SimpleDateFormat("dd-MM-yyyy");
-        final String fchAct = fecc.format(d);
+        final String fecha = fecc.format(d);
 
-        final String userid =PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
+        final String usuario_id =PreferencesManager.getInstance().get(PreferencesManager.PREF_ID);
         final String serie = "123548";
-        final String tipeDoc = tDoc.getSelectedItem().toString();
-        final String lugar = lugarTxt.getText().toString();
-        final String ruc = rucTxt.getText().toString();
-        final String tipePago = pago.getSelectedItem().toString();
-        final double monto = Double.parseDouble(montoInput.getText().toString());
-        final String nCheque = chequeInput.getText().toString();
+        final String tipo = tDoc.getSelectedItem().toString();
+        final String distritoCli = lugarTxt.getText().toString();
+        final String rucCli = rucTxt.getText().toString();
+        final String tipoPago = pago.getSelectedItem().toString();
+        final double monto = Double.parseDouble(precio);
+        final String numCheque = nCheque ;
         final int banco_id = banco.getSelectedItemPosition() + 1;//+1 porq en posicioon inicia en 0
-        final String nOpe = opeInpt.getText().toString();
-        final String obs = obsInput.getText().toString();
+        final String numOpe = nOpe;
+        final String observaciones = obs;
+
+        if(tipoPago.equals("--Seleccione--") || precio.equals("0")){
+            Toast.makeText(this, "Completar los campos obligatorio", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Log.d(TAG, "create: " + usuario_id +"/"+ fecha +"/"+ serie +"/"+ numDoc +"/"+ tipo +"/"+ cliente_id +"/"+ distritoCli +"/"+ rucCli +"/"+ tipoPago +"/"+ monto +"/"+ numCheque +"/"+ banco_id +"/"+ numOpe +"/"+ observaciones);
 
         ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
         Call<Cobranza> call = null;
 
-        call = service.store(userid, serie, fchAct,tipeDoc,numDoc,Integer.parseInt(clientId),lugar,ruc,tipePago,monto,nCheque,banco_id,nOpe,obs);
+        call = service.store(usuario_id, serie, fecha,tipo,numDoc,Integer.parseInt(cliente_id),distritoCli,rucCli,tipoPago,monto,numCheque,banco_id,numOpe,observaciones);
 
         call.enqueue(new Callback<Cobranza>() {
             @Override
@@ -299,8 +313,9 @@ public class InformeActivity extends AppCompatActivity {
 
                         Cobranza responseMessage = response.body();
                         Log.d(TAG, "responseMessage: " + responseMessage);
-                        Log.d(TAG, "create: " + userid +"/"+ fchAct +"/"+ serie +"/"+ numDoc +"/"+ tipeDoc +"/"+ clientId +"/"+ lugar +"/"+ ruc +"/"+ tipePago +"/"+ monto +"/"+ nCheque +"/"+ banco_id +"/"+ nOpe +"/"+ obs);
 
+                        Toast.makeText(InformeActivity.this,"Se guardo conforme",Toast.LENGTH_LONG).show();
+                        finish();
 
                     } else {
                         Log.e(TAG, "onError: " + response.errorBody().string());

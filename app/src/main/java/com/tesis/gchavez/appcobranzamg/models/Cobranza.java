@@ -17,12 +17,13 @@ public class Cobranza {
     private Integer banco_id;
     private String numOpe;
     private String observaciones;
+    private Cliente cliente_a;
 
     public Cobranza() {
 
     }
 
-    public Cobranza(Integer id, Integer usuario_id, String serie, String fecha, String tipo, String numDoc, Integer cliente_id, String distritoCli, String rucCli, String tipoPago, Double monto, String numCheque, Integer banco_id, String numOpe, String observaciones) {
+    public Cobranza(Integer id, Integer usuario_id, String serie, String fecha, String tipo, String numDoc, Integer cliente_id, String distritoCli, String rucCli, String tipoPago, Double monto, String numCheque, Integer banco_id, String numOpe, String observaciones, Cliente cliente_a) {
         this.id = id;
         this.usuario_id = usuario_id;
         this.serie = serie;
@@ -38,6 +39,7 @@ public class Cobranza {
         this.banco_id = banco_id;
         this.numOpe = numOpe;
         this.observaciones = observaciones;
+        this.cliente_a = cliente_a;
     }
 
     public Integer getId() { return id; }
@@ -85,24 +87,29 @@ public class Cobranza {
     public String getObservaciones() { return observaciones; }
     public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
 
+    public Cliente getCliente_a() { return cliente_a; }
+
+    public void setCliente_a(Cliente cliente_a) { this.cliente_a = cliente_a; }
+
     @Override
     public String toString() {
         return "Cobranza{" +
                 "id=" + id +
-                ", usuarioId=" + usuario_id +
+                ", usuario_id=" + usuario_id +
                 ", serie='" + serie + '\'' +
                 ", fecha='" + fecha + '\'' +
-                ", tipo=" + tipo +
+                ", tipo='" + tipo + '\'' +
                 ", numDoc='" + numDoc + '\'' +
-                ", clienteId=" + cliente_id +
+                ", cliente_id=" + cliente_id +
                 ", distritoCli='" + distritoCli + '\'' +
                 ", rucCli='" + rucCli + '\'' +
                 ", tipoPago='" + tipoPago + '\'' +
                 ", monto=" + monto +
                 ", numCheque='" + numCheque + '\'' +
-                ", bancoId=" + banco_id +
+                ", banco_id=" + banco_id +
                 ", numOpe='" + numOpe + '\'' +
                 ", observaciones='" + observaciones + '\'' +
+                ", cliente_a=" + cliente_a +
                 '}';
     }
 }

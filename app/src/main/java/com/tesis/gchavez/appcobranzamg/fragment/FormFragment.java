@@ -107,7 +107,7 @@ public class FormFragment extends DialogFragment implements View.OnClickListener
                         Log.d(TAG, "res_cobranza: " + rescobra);
 
                         InfosAdapter adapter = (InfosAdapter) infosList.getAdapter();
-                        adapter.setClientes(rescobra);
+                        adapter.setCobranzas(rescobra);
                         adapter.notifyDataSetChanged();
 
                         // ProgressBar Gone

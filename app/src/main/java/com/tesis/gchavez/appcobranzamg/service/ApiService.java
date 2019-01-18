@@ -19,8 +19,8 @@ import retrofit2.http.Path;
 
 public interface  ApiService {
 
-    //String API_BASE_URL = "https://montgroup.pe/api/public/";
-    String API_BASE_URL = "https://mgcobranza-gustavoch25.c9users.io/";
+    String API_BASE_URL = "https://montgroup.pe/api/public/";
+    //String API_BASE_URL = "https://mgcobranza-gustavoch25.c9users.io/";
 
 
     @FormUrlEncoded
@@ -68,19 +68,19 @@ public interface  ApiService {
     @FormUrlEncoded
     @POST("api/v1/cobra")
     Call<Cobranza> store(
-            @Field("userid") String usuario_id,
+            @Field("usuario_id") String usuario_id,
             @Field("serie") String serie,
-            @Field("fchAct") String fecha,
-            @Field("tipeDoc") String tipo,
+            @Field("fecha") String fecha,
+            @Field("tipo") String tipo,
             @Field("numDoc") String numDoc,
-            @Field("clientId") Integer cliente_id,
-            @Field("lugar") String distritoCli,
-            @Field("ruc") String rucCli,
-            @Field("tipePago") String tipoPago,
+            @Field("cliente_id") Integer cliente_id,
+            @Field("distritoCli") String distritoCli,
+            @Field("rucCli") String rucCli,
+            @Field("tipoPago") String tipoPago,
             @Field("monto") Double monto,
-            @Field("nCheque") String numCheque,
+            @Field("numCheque") String numCheque,
             @Field("banco_id") Integer banco_id,
-            @Field("nOpe") String numOpe,
-            @Field("obs") String observaciones
+            @Field("numOpe") String numOpe,
+            @Field("observaciones") String observaciones
     );
 }

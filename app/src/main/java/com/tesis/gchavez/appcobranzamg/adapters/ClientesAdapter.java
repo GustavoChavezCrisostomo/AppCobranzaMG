@@ -35,15 +35,15 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ViewHo
 
     public void setClientes(List<Cliente> clientes){this.clientes = clientes;}
 
-    public class ViewHolder extends  RecyclerView.ViewHolder{
+    class ViewHolder extends  RecyclerView.ViewHolder{
 
-        public TextView clienteText;
-        public TextView rucText;
-        public TextView deudaText;
-        public TextView idClienteText;
+        private TextView clienteText;
+        private TextView rucText;
+        private TextView deudaText;
+        private TextView idClienteText;
         private ImageButton btnBorrar;
 
-        public ViewHolder(View itemView){
+        ViewHolder(View itemView){
             super(itemView);
             clienteText = itemView.findViewById(R.id.txt_cliente);
             rucText = itemView.findViewById(R.id.txt_ruc);
