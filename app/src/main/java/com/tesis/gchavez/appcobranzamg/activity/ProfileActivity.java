@@ -41,8 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = ProfileActivity.class.getSimpleName();
 
-    private int id;
-
     public ProgressBar progressBar;
     public TextView userText;
     public ImageView fotoImage;
@@ -63,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
         // ProgressBar Gone
         //ProfileActivity.this.findViewById(R.id.main_progress).setVisibility(View.GONE);
 
-        id = Integer.parseInt(PreferencesManager.getInstance().get(PreferencesManager.PREF_ID));
+        int id = Integer.parseInt(PreferencesManager.getInstance().get(PreferencesManager.PREF_ID));
 
         progressBar = findViewById(R.id.main_progress);
         userText = findViewById(R.id.name_text);
